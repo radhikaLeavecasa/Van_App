@@ -1,0 +1,6 @@
+module TTGSnackbar {
+  umbrella header "TTGSnackbar-library-umbrella.h"
+
+  export *
+  module * { export * }
+}

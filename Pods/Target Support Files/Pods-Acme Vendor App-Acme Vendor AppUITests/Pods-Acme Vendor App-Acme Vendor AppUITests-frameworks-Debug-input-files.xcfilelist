@@ -1,0 +1,9 @@
+${PODS_ROOT}/Target Support Files/Pods-Acme Vendor App-Acme Vendor AppUITests/Pods-Acme Vendor App-Acme Vendor AppUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AdvancedPageControl-framework/AdvancedPageControl.framework
+${BUILT_PRODUCTS_DIR}/Alamofire-framework/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift-framework/IQKeyboardManagerSwift.framework
+${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView-framework/NVActivityIndicatorView.framework
+${BUILT_PRODUCTS_DIR}/OTPFieldView-framework/OTPFieldView.framework
+${BUILT_PRODUCTS_DIR}/ObjectMapper-framework/ObjectMapper.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage-framework/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/TTGSnackbar-framework/TTGSnackbar.framework

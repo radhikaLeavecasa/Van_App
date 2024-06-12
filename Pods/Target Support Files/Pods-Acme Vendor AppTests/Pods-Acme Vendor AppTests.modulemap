@@ -1,0 +1,6 @@
+framework module Pods_Acme_Vendor_AppTests {
+  umbrella header "Pods-Acme Vendor AppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

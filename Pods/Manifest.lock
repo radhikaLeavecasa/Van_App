@@ -1,0 +1,48 @@
+PODS:
+  - AdvancedPageControl (0.9.0)
+  - Alamofire (5.8.1)
+  - IQKeyboardManagerSwift (7.0.1)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
+  - ObjectMapper (4.2.0)
+  - OTPFieldView (1.0.1)
+  - SDWebImage (5.18.10):
+    - SDWebImage/Core (= 5.18.10)
+  - SDWebImage/Core (5.18.10)
+  - TTGSnackbar (1.11.1)
+
+DEPENDENCIES:
+  - AdvancedPageControl
+  - Alamofire
+  - IQKeyboardManagerSwift
+  - NVActivityIndicatorView
+  - ObjectMapper
+  - OTPFieldView
+  - SDWebImage
+  - TTGSnackbar
+
+SPEC REPOS:
+  trunk:
+    - AdvancedPageControl
+    - Alamofire
+    - IQKeyboardManagerSwift
+    - NVActivityIndicatorView
+    - ObjectMapper
+    - OTPFieldView
+    - SDWebImage
+    - TTGSnackbar
+
+SPEC CHECKSUMS:
+  AdvancedPageControl: 39e3b32b00b2d324c534f8e17cc6c5be9abe84b7
+  Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
+  IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  OTPFieldView: 700a752fe62c41d1c4914c78aa500fb30d97c255
+  SDWebImage: fc8f2d48bbfd72ef39d70e981bd24a3f3be53fec
+  TTGSnackbar: fea91c62637b5662f808a4c3b55f7631cb7e1ef7
+
+PODFILE CHECKSUM: a9de4314aff480eb5d43a65493c8deaf47a2585a
+
+COCOAPODS: 1.15.2

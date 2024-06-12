@@ -1,0 +1,6 @@
+module AdvancedPageControl {
+  umbrella header "AdvancedPageControl-library-umbrella.h"
+
+  export *
+  module * { export * }
+}
