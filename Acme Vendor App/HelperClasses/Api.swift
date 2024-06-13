@@ -20,33 +20,47 @@ enum Api: Equatable {
     
     case fetchApi(_ code: String)
     case uploadSiteDetails
-    case logout
-    case login
-    case verifyOtp
     case asmSiteListing(_ name: String)
     case asmSiteApproved(_ name: String)
     case asmSiteRejected(_ name: String)
     case asmSitePending(_ name: String)
-    
     case supervisorListing(_ code: Int)
     case supervisorApproved(_ code: Int)
     case supervisorRejected(_ code: Int)
     case supervisorPending(_ code: Int)
-    
     case acceptReject
+    
+    //Van App
+    case logout
+    case login
+    case verifyOtp
+    case vanApi
+    case promotorApi
+    case driverApi
+    case helperApi
    
     func rawValued() -> String {
         switch self {
-        case let .fetchApi(code):
-            return "rcode/\(code)"
-        case .uploadSiteDetails:
-            return "project"
+        //Van App
         case .logout:
             return "logout"
         case .login:
             return "login"
         case .verifyOtp:
             return "verifyLogin"
+        case .vanApi:
+            return "van"
+        case .promotorApi:
+            return "promotor"
+        case .driverApi:
+            return "driver"
+        case .helperApi:
+            return "helper"
+            
+        case let .fetchApi(code):
+            return "rcode/\(code)"
+        case .uploadSiteDetails:
+            return "project"
         case let .asmSiteListing(name):
             return "asm-project/\(name)"
         case let .asmSiteApproved(name):

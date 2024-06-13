@@ -9,8 +9,8 @@ import Foundation
 
 extension NSDictionary {
     
-    var type:String{
-        let type = self["type"] as? String ?? ""
+    var type:Int{
+        let type = self["type"] as? Int ?? 0
         return type
     }
     

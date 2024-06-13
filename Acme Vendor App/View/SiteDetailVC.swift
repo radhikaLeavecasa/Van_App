@@ -45,8 +45,8 @@ class SiteDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
-        cnstHeightBottomStack.constant = Cookies.userInfo()?.type == "asm" ? 50 : 0
-        vwStackView.isHidden = Cookies.userInfo()?.type != "asm"
+//        cnstHeightBottomStack.constant = Cookies.userInfo()?.type == "asm" ? 50 : 0
+//        vwStackView.isHidden = Cookies.userInfo()?.type != "asm"
     }
     //MARK: - Custom method
     func setData(){

@@ -43,13 +43,13 @@ class OtpVC: UIViewController {
                          WSRequestParams.WS_REQS_PARAM_PASSWORD: self.otp] as! [String:AnyObject]
             viewModel.otpVerifyApi(param) { val, msg in
                 if val {
-                    if Cookies.userInfo()?.type == "1" { //Admin
+                    if Cookies.userInfo()?.type == 1 { //Admin
                         let vc = ViewControllerHelper.getViewController(ofType: .ListingVC, StoryboardName: .Main) as! ListingVC
                         self.setView(vc: vc)
-                    } else if Cookies.userInfo()?.type == "2" { //Client
+                    } else if Cookies.userInfo()?.type == 2 { //Client
                         let vc = ViewControllerHelper.getViewController(ofType: .ListingVC, StoryboardName: .Main) as! ListingVC
                         self.setView(vc: vc)
-                    } else if Cookies.userInfo()?.type == "3" { //Supervisor
+                    } else if Cookies.userInfo()?.type == 3 { //Supervisor
                         let vc = ViewControllerHelper.getViewController(ofType: .HomeVC, StoryboardName: .Main) as! HomeVC
                         self.setView(vc: vc)
                     }

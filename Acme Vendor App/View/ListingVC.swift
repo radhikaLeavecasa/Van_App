@@ -23,17 +23,17 @@ class ListingVC: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        if Cookies.userInfo()?.type == "asm" {
+        if Cookies.userInfo()?.type == 1 {
             btnAdd.isHidden = true
-            viewModel.asmSiteListingApi(.asmSiteListing(Cookies.userInfo()?.name ?? "")) { val, msg in
+            viewModel.getPostVanApi(.get, completion: { val, msg in
                 if val {
-                    if self.viewModel.arrListing?.count == 0 {
-                        self.lblNoDataFound.isHidden = false
-                        self.collVwSites.isHidden = true
-                    } else {
-                        self.lblNoDataFound.isHidden = true
-                        self.collVwSites.isHidden = false
-                    }
+//                    if self.viewModel.arrListing?.count == 0 {
+//                        self.lblNoDataFound.isHidden = false
+//                        self.collVwSites.isHidden = true
+//                    } else {
+//                        self.lblNoDataFound.isHidden = true
+//                        self.collVwSites.isHidden = false
+//                    }
                     self.collVwSites.reloadData()
                 } else {
                     if msg == CommonError.INTERNET {
@@ -42,32 +42,22 @@ class ListingVC: UIViewController {
                         Proxy.shared.showSnackBar(message: msg)
                     }
                 }
-            }
-        } else if Cookies.userInfo()?.type == "supervisor" {
+            })
+        } else if Cookies.userInfo()?.type == 2 {
             btnAdd.isHidden = false
-            viewModel.supervisorListingApi(.supervisorListing(Cookies.userInfo()?.id ?? 0)) { val, msg in
-                if val {
-                    if self.viewModel.arrListing?.count == 0 {
-                        self.lblNoDataFound.isHidden = false
-                        self.collVwSites.isHidden = true
-                    } else {
-                        self.lblNoDataFound.isHidden = true
-                        self.collVwSites.isHidden = false
-                    }
-                    self.collVwSites.reloadData()
-                } else {
-                    if msg == CommonError.INTERNET {
-                        Proxy.shared.showSnackBar(message: CommonMessage.NO_INTERNET_CONNECTION)
-                    } else {
-                        Proxy.shared.showSnackBar(message: msg)
-                    }
-                }
-            }
+            
         }
     }
     @IBAction func actionAdd(_ sender: Any) {
-        let vc = ViewControllerHelper.getViewController(ofType: .HomeVC, StoryboardName: .Main) as! HomeVC
-        self.pushView(vc: vc)
+        let vc = ViewControllerHelper.getViewController(ofType: .AddDetailsVC, StoryboardName: .Main) as! AddDetailsVC
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        vc.tagDelegate = { tag in
+            let vc = ViewControllerHelper.getViewController(ofType: .RegisterDetailsVC, StoryboardName: .Main) as! RegisterDetailsVC
+            vc.type = tag
+            self.pushView(vc: vc)
+        }
+        self.present(vc, animated: true)
     }
     @IBAction func actionLogout(_ sender: Any) {
         let alert = UIAlertController(title: "Logout?", message: "Are you sure you want to logout?", preferredStyle: .alert)
@@ -100,7 +90,7 @@ class ListingVC: UIViewController {
 
 extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        collectionView == collVwOptions ? arrHeader.count : viewModel.arrListing?.count ?? 0
+        collectionView == collVwOptions ? arrHeader.count : 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -112,33 +102,40 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SiteCVC", for: indexPath) as! SiteCVC
-            cell.lblShopName.text = viewModel.arrListing?[indexPath.row].retailName
-            cell.imgVwSite.sd_setImage(with: URL(string: "\(imageBaseUrl)\(viewModel.arrListing?[indexPath.row].image1 ?? "")"), placeholderImage: .placeholderImage())
+//            cell.lblShopName.text = viewModel.arrListing?[indexPath.row].retailName
+//            cell.imgVwSite.sd_setImage(with: URL(string: "\(imageBaseUrl)\(viewModel.arrListing?[indexPath.row].image1 ?? "")"), placeholderImage: .placeholderImage())
             return cell
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == collVwOptions {
-            return CGSize(width: self.collVwOptions.frame.size.width/4, height: self.collVwOptions.frame.size.height)
+            let label = UILabel(frame: CGRect.zero)
+            label.text = arrHeader[indexPath.item]
+            label.sizeToFit()
+            return CGSize(width: label.frame.width+15, height: self.collVwOptions.frame.size.height)
         } else {
-            return CGSize(width: self.collVwSites.frame.size.width/2, height: self.collVwSites.frame.size.width/2)
+            if indexPath.row == 0 {
+                return CGSize(width: self.collVwSites.frame.size.width/2, height: self.collVwSites.frame.size.width/2)
+            } else {
+                return CGSize(width: self.collVwSites.frame.size.width, height: self.collVwSites.frame.size.width/2)
+            }
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == collVwOptions {
             selectedIndex = indexPath.row
             
-            switch Cookies.userInfo()?.type {
-            case "asm": //(Cookies.userInfo()?.name ?? "") //Bipul Dubey //Rahul Dixit //VACANT ASM HP
-                viewModel.asmSiteListingApi(indexPath.row == 0 ? .asmSiteListing(Cookies.userInfo()?.name ?? "") : indexPath.row == 1 ? .asmSitePending(Cookies.userInfo()?.name ?? "") : indexPath.row == 2 ? .asmSiteApproved(Cookies.userInfo()?.name ?? "") : .asmSiteRejected(Cookies.userInfo()?.name ?? "")) { val, msg in
+            switch indexPath.row {
+            case 0:
+                viewModel.getPostVanApi(.get, completion: { val, msg in
                     if val {
-                        if self.viewModel.arrListing?.count == 0 {
-                            self.lblNoDataFound.isHidden = false
-                            self.collVwSites.isHidden = true
-                        } else {
-                            self.lblNoDataFound.isHidden = true
-                            self.collVwSites.isHidden = false
-                        }
+    //                    if self.viewModel.arrListing?.count == 0 {
+    //                        self.lblNoDataFound.isHidden = false
+    //                        self.collVwSites.isHidden = true
+    //                    } else {
+    //                        self.lblNoDataFound.isHidden = true
+    //                        self.collVwSites.isHidden = false
+    //                    }
                         self.collVwSites.reloadData()
                     } else {
                         if msg == CommonError.INTERNET {
@@ -147,17 +144,17 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                             Proxy.shared.showSnackBar(message: msg)
                         }
                     }
-                }
-            case "supervisor":
-                viewModel.asmSiteListingApi(indexPath.row == 0 ? .supervisorListing(Cookies.userInfo()?.id ?? 0) : indexPath.row == 1 ? .supervisorPending(Cookies.userInfo()?.id ?? 0) : indexPath.row == 2 ? .supervisorApproved(Cookies.userInfo()?.id ?? 0) : .supervisorRejected(Cookies.userInfo()?.id ?? 0)) { val, msg in
+                })
+            case 1:
+                viewModel.getPostDriverApi(.get, completion: { val, msg in
                     if val {
-                        if self.viewModel.arrListing?.count == 0 {
-                            self.lblNoDataFound.isHidden = false
-                            self.collVwSites.isHidden = true
-                        } else {
-                            self.lblNoDataFound.isHidden = true
-                            self.collVwSites.isHidden = false
-                        }
+    //                    if self.viewModel.arrListing?.count == 0 {
+    //                        self.lblNoDataFound.isHidden = false
+    //                        self.collVwSites.isHidden = true
+    //                    } else {
+    //                        self.lblNoDataFound.isHidden = true
+    //                        self.collVwSites.isHidden = false
+    //                    }
                         self.collVwSites.reloadData()
                     } else {
                         if msg == CommonError.INTERNET {
@@ -166,16 +163,52 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
                             Proxy.shared.showSnackBar(message: msg)
                         }
                     }
-                }
+                })
+            case 2:
+                viewModel.getPostHelperApi(.get, completion: { val, msg in
+                    if val {
+    //                    if self.viewModel.arrListing?.count == 0 {
+    //                        self.lblNoDataFound.isHidden = false
+    //                        self.collVwSites.isHidden = true
+    //                    } else {
+    //                        self.lblNoDataFound.isHidden = true
+    //                        self.collVwSites.isHidden = false
+    //                    }
+                        self.collVwSites.reloadData()
+                    } else {
+                        if msg == CommonError.INTERNET {
+                            Proxy.shared.showSnackBar(message: CommonMessage.NO_INTERNET_CONNECTION)
+                        } else {
+                            Proxy.shared.showSnackBar(message: msg)
+                        }
+                    }
+                })
             default:
-                break
+                viewModel.getPostSupervisorApi(.get, completion: { val, msg in
+                    if val {
+    //                    if self.viewModel.arrListing?.count == 0 {
+    //                        self.lblNoDataFound.isHidden = false
+    //                        self.collVwSites.isHidden = true
+    //                    } else {
+    //                        self.lblNoDataFound.isHidden = true
+    //                        self.collVwSites.isHidden = false
+    //                    }
+                        self.collVwSites.reloadData()
+                    } else {
+                        if msg == CommonError.INTERNET {
+                            Proxy.shared.showSnackBar(message: CommonMessage.NO_INTERNET_CONNECTION)
+                        } else {
+                            Proxy.shared.showSnackBar(message: msg)
+                        }
+                    }
+                })
             }
             collVwOptions.reloadData()
 
         } else {
-            let vc = ViewControllerHelper.getViewController(ofType: .SiteDetailVC, StoryboardName: .Main) as! SiteDetailVC
-            vc.siteDetail = viewModel.arrListing?[indexPath.row]
-            self.pushView(vc: vc)
+//            let vc = ViewControllerHelper.getViewController(ofType: .SiteDetailVC, StoryboardName: .Main) as! SiteDetailVC
+//            vc.siteDetail = viewModel.arrListing?[indexPath.row]
+//            self.pushView(vc: vc)
         }
     }
 }

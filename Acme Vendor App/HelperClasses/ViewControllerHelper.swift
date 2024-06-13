@@ -24,6 +24,8 @@ enum ViewControllerType : String {
     case SiteDetailVC
     case RejectionVC
     case ListingVC
+    case AddDetailsVC
+    case RegisterDetailsVC
 }
 
 class ViewControllerHelper: NSObject {

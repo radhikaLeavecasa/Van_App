@@ -7,10 +7,11 @@
 
 import UIKit
 import ObjectMapper
+import Alamofire
 
 class ListingVM: NSObject {
     //MARK: - Variables
-    var arrListing: [ListingModel]?
+    
     
     func logoutApi(_ completion: @escaping (Bool,String) -> Void) {
         Proxy.shared.loadAnimation()
@@ -24,16 +25,15 @@ class ListingVM: NSObject {
         }
     }
     
-    func asmSiteListingApi(_ api:Api, completion: @escaping(Bool, String) -> Void) {
+    func getPostVanApi(_ method: HTTPMethod, completion: @escaping(Bool, String) -> Void) {
         Proxy.shared.loadAnimation()
-        arrListing = []
-        WebService.callApi(api: api, method: .get, param: [:], header: true) { status, msg, response in
+        WebService.callApi(api: .vanApi, method: method, param: [:], header: true) { status, msg, response in
             Proxy.shared.stopAnimation()
             if status == true {
                 if let data = response as? [String:Any] {
-                    if let arrListing = data["data"] as? [[String: Any]] , let data2 = Mapper<ListingModel>().mapArray(JSONArray: arrListing) as [ListingModel]? {
-                        self.arrListing?.append(contentsOf: data2)
-                    }
+//                    if let arrListing = data["data"] as? [[String: Any]] , let data2 = Mapper<ListingModel>().mapArray(JSONArray: arrListing) as [ListingModel]? {
+//                        self.arrListing?.append(contentsOf: data2)
+//                    }
                     completion(true, "")
                 }
             } else {
@@ -41,17 +41,47 @@ class ListingVM: NSObject {
             }
         }
     }
-    
-    func supervisorListingApi(_ api:Api, completion: @escaping(Bool, String) -> Void) {
+    func getPostDriverApi(_ method: HTTPMethod, completion: @escaping(Bool, String) -> Void) {
         Proxy.shared.loadAnimation()
-        arrListing = []
-        WebService.callApi(api: api, method: .get, param: [:], header: true) { status, msg, response in
+        WebService.callApi(api: .driverApi, method: method, param: [:], header: true) { status, msg, response in
             Proxy.shared.stopAnimation()
             if status == true {
                 if let data = response as? [String:Any] {
-                    if let arrListing = data["data"] as? [[String: Any]] , let data2 = Mapper<ListingModel>().mapArray(JSONArray: arrListing) as [ListingModel]? {
-                        self.arrListing?.append(contentsOf: data2)
-                    }
+//                    if let arrListing = data["data"] as? [[String: Any]] , let data2 = Mapper<ListingModel>().mapArray(JSONArray: arrListing) as [ListingModel]? {
+//                        self.arrListing?.append(contentsOf: data2)
+//                    }
+                    completion(true, "")
+                }
+            } else {
+                completion(true, msg)
+            }
+        }
+    }
+    func getPostSupervisorApi(_ method: HTTPMethod, completion: @escaping(Bool, String) -> Void) {
+        Proxy.shared.loadAnimation()
+        WebService.callApi(api: .promotorApi, method: method, param: [:], header: true) { status, msg, response in
+            Proxy.shared.stopAnimation()
+            if status == true {
+                if let data = response as? [String:Any] {
+//                    if let arrListing = data["data"] as? [[String: Any]] , let data2 = Mapper<ListingModel>().mapArray(JSONArray: arrListing) as [ListingModel]? {
+//                        self.arrListing?.append(contentsOf: data2)
+//                    }
+                    completion(true, "")
+                }
+            } else {
+                completion(true, msg)
+            }
+        }
+    }
+    func getPostHelperApi(_ method: HTTPMethod, completion: @escaping(Bool, String) -> Void) {
+        Proxy.shared.loadAnimation()
+        WebService.callApi(api: .helperApi, method: method, param: [:], header: true) { status, msg, response in
+            Proxy.shared.stopAnimation()
+            if status == true {
+                if let data = response as? [String:Any] {
+//                    if let arrListing = data["data"] as? [[String: Any]] , let data2 = Mapper<ListingModel>().mapArray(JSONArray: arrListing) as [ListingModel]? {
+//                        self.arrListing?.append(contentsOf: data2)
+//                    }
                     completion(true, "")
                 }
             } else {

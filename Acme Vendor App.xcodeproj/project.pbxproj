@@ -14,6 +14,7 @@
 		7213E5CD2C19B8E200773DDD /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213E5CC2C19B8E200773DDD /* MapVC.swift */; };
 		7213E5CF2C19CF9800773DDD /* ListingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213E5CE2C19CF9800773DDD /* ListingVC.swift */; };
 		7213E5D12C19CFBB00773DDD /* ListingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213E5D02C19CFBB00773DDD /* ListingVM.swift */; };
+		7213E5D32C19D9FE00773DDD /* VehicleRegisPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213E5D22C19D9FE00773DDD /* VehicleRegisPopUpVC.swift */; };
 		7251E56B2C0EDB3900A900CE /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7251E56A2C0EDB3900A900CE /* SplashVC.swift */; };
 		7251E56D2C0EE05F00A900CE /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7251E56C2C0EE05F00A900CE /* ViewControllerHelper.swift */; };
 		7251E56F2C0EE21300A900CE /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7251E56E2C0EE21300A900CE /* WebServices.swift */; };
@@ -53,6 +54,8 @@
 		7271F5222C0DE19400372593 /* ExtensionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7271F5212C0DE19400372593 /* ExtensionClass.swift */; };
 		7271F5262C0DE4B900372593 /* DMSans_24pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7271F5242C0DE4B900372593 /* DMSans_24pt-Regular.ttf */; };
 		7271F5272C0DE4B900372593 /* DMSans_24pt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7271F5252C0DE4B900372593 /* DMSans_24pt-Medium.ttf */; };
+		729C7A1A2C1AD00700AFC90C /* AddDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729C7A192C1AD00700AFC90C /* AddDetailsVC.swift */; };
+		729C7A1C2C1ADE7F00AFC90C /* RegisterDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729C7A1B2C1ADE7F00AFC90C /* RegisterDetailsVC.swift */; };
 		72E3D1FF2C13150C0041929A /* OptionsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3D1FE2C13150C0041929A /* OptionsCVC.swift */; };
 		72E3D2012C1315600041929A /* SiteCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3D2002C1315600041929A /* SiteCVC.swift */; };
 		72E3D2072C131D580041929A /* ListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3D2062C131D580041929A /* ListingModel.swift */; };
@@ -90,6 +93,7 @@
 		7213E5CC2C19B8E200773DDD /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		7213E5CE2C19CF9800773DDD /* ListingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingVC.swift; sourceTree = "<group>"; };
 		7213E5D02C19CFBB00773DDD /* ListingVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListingVM.swift; sourceTree = "<group>"; };
+		7213E5D22C19D9FE00773DDD /* VehicleRegisPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleRegisPopUpVC.swift; sourceTree = "<group>"; };
 		7251E56A2C0EDB3900A900CE /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		7251E56C2C0EE05F00A900CE /* ViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
 		7251E56E2C0EE21300A900CE /* WebServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 		7271F5212C0DE19400372593 /* ExtensionClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionClass.swift; sourceTree = "<group>"; };
 		7271F5242C0DE4B900372593 /* DMSans_24pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans_24pt-Regular.ttf"; sourceTree = "<group>"; };
 		7271F5252C0DE4B900372593 /* DMSans_24pt-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans_24pt-Medium.ttf"; sourceTree = "<group>"; };
+		729C7A192C1AD00700AFC90C /* AddDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsVC.swift; sourceTree = "<group>"; };
+		729C7A1B2C1ADE7F00AFC90C /* RegisterDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDetailsVC.swift; sourceTree = "<group>"; };
 		72E3D1FE2C13150C0041929A /* OptionsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsCVC.swift; sourceTree = "<group>"; };
 		72E3D2002C1315600041929A /* SiteCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteCVC.swift; sourceTree = "<group>"; };
 		72E3D2062C131D580041929A /* ListingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingModel.swift; sourceTree = "<group>"; };
@@ -183,6 +189,9 @@
 				7271F4F42C0DDC1A00372593 /* HomeVC.swift */,
 				7251E56A2C0EDB3900A900CE /* SplashVC.swift */,
 				7213E5C82C19AF0F00773DDD /* AlertThankyouVC.swift */,
+				7213E5D22C19D9FE00773DDD /* VehicleRegisPopUpVC.swift */,
+				729C7A1B2C1ADE7F00AFC90C /* RegisterDetailsVC.swift */,
+				729C7A192C1AD00700AFC90C /* AddDetailsVC.swift */,
 				7267F1D22C18558D00F50B65 /* RejectionVC.swift */,
 				7213E5CE2C19CF9800773DDD /* ListingVC.swift */,
 				72EC85532C133A5D00BA6CF7 /* SiteDetailVC.swift */,
@@ -650,7 +659,9 @@
 				7251E5712C0EE36D00A900CE /* UIViewControllerExtension.swift in Sources */,
 				7251E57A2C0EE7F000A900CE /* CommonFunctions.swift in Sources */,
 				7251E5832C0F23EF00A900CE /* LoginVC.swift in Sources */,
+				729C7A1A2C1AD00700AFC90C /* AddDetailsVC.swift in Sources */,
 				7213E5CF2C19CF9800773DDD /* ListingVC.swift in Sources */,
+				7213E5D32C19D9FE00773DDD /* VehicleRegisPopUpVC.swift in Sources */,
 				72E3D2092C131E500041929A /* Cookies.swift in Sources */,
 				72E3D2072C131D580041929A /* ListingModel.swift in Sources */,
 				7271F4F12C0DDC1A00372593 /* AppDelegate.swift in Sources */,
@@ -660,6 +671,7 @@
 				7271F5222C0DE19400372593 /* ExtensionClass.swift in Sources */,
 				7251E5762C0EE3E700A900CE /* Api.swift in Sources */,
 				7267F1D32C18558D00F50B65 /* RejectionVC.swift in Sources */,
+				729C7A1C2C1ADE7F00AFC90C /* RegisterDetailsVC.swift in Sources */,
 				7271F4F32C0DDC1A00372593 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
