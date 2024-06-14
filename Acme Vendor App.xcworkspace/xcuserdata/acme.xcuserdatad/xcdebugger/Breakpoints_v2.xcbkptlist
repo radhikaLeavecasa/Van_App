@@ -108,8 +108,8 @@
             filePath = "Acme Vendor App/View/SiteDetailVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "actionAcceptReject(_:)"
             landmarkType = "7">
             <Locations>
@@ -188,6 +188,36 @@
                   endingLineNumber = "112"
                   offsetFromSymbolStart = "96">
                </Location>
+               <Location
+                  uuid = "9C3D143B-987F-4CE6-971E-C858A809489C - 9d5f20ce70baa592"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;__C.UIAlertAction&gt;) -&gt; () in Acme_Vendor_App.SiteDetailVC.actionAcceptReject(__C.UIButton) -&gt; ()"
+                  moduleName = "Acme Vendor App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/acme/Desktop/Van%20App/Acme%20Vendor%20App/View/SiteDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "896">
+               </Location>
+               <Location
+                  uuid = "9C3D143B-987F-4CE6-971E-C858A809489C - cba893aa1ffd279d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.String) -&gt; () in closure #2 (Swift.Optional&lt;__C.UIAlertAction&gt;) -&gt; () in Acme_Vendor_App.SiteDetailVC.actionAcceptReject(__C.UIButton) -&gt; ()"
+                  moduleName = "Acme Vendor App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/acme/Desktop/Van%20App/Acme%20Vendor%20App/View/SiteDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "96">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -204,86 +234,6 @@
             startingLineNumber = "15"
             endingLineNumber = "15"
             landmarkName = "acceptRejectApi(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "56422970-B5C3-4966-A76B-AB80B60C76C8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Acme Vendor App/View/OtpVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "actionNext(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2D12F031-20A3-452B-997B-57163264A32D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Acme Vendor App/ViewModel/OtpVM.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "otpVerifyApi(_:_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "2D12F031-20A3-452B-997B-57163264A32D - 6200ff40f06f2b6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.String, Any) -&gt; () in Acme_Vendor_App.OtpVM.otpVerifyApi(Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "Acme Vendor App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/acme/Desktop/Van%20App/Acme%20Vendor%20App/ViewModel/OtpVM.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "284">
-               </Location>
-               <Location
-                  uuid = "2D12F031-20A3-452B-997B-57163264A32D - 6200ff40f06f2b6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.String, Any) -&gt; () in Acme_Vendor_App.OtpVM.otpVerifyApi(Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, (Swift.Bool, Swift.String) -&gt; ()) -&gt; ()"
-                  moduleName = "Acme Vendor App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/acme/Desktop/Van%20App/Acme%20Vendor%20App/ViewModel/OtpVM.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "420">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FC0D9C2B-6895-40BA-84E5-767F88B98169"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Acme Vendor App/View/ListingVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -32,9 +32,7 @@ struct CommonParam{
 //    static let ADDRESS1 = "AddressLine1"
 //    static let DOB = "date_of_birth"
 //    static let GENDER = "gender"
-//    static let PHONE = "phone"
-//    static let EMAIL = "email"
-//    static let NAME = "name"
+//
     static let USER_TOKEN = "token"
 //    static let YES = "YES"
 //    static let IS_PROFILE_PENDING = "is_profile_pending"
@@ -167,10 +165,33 @@ struct CommonMessage {
     static let ADD_STORE_PHOTO4 = "Please upload store photo 4"
     static let ADD_SIGNATURE_OF_OWNER = "Please upload signature of owner"
     static let LAT_LONG_FETCH = "Latitude & longitude were not fetched properly, please check location settings and retake site photo to fetch latitude & longitude"
+    //Van
+    static let ENTER_UNIQUE_NUMBER = "Please enter van's unique Id No."
+    static let ENTER_REGISTRATION_NUMBER = "Please enter registration No."
+    static let ENTER_POLLUTION_CERTIFICATE = "Please enter pollution No."
+    static let ENTER_INSURANCE_CERTIFICATE = "Please enter insurance No."
+    static let ENTER_COMMERCIAL_LICENSE = "Please enter commercial license No."
     
-//    static let ENTER_STATE = "No Internet Connection"
-//    static let ENTER_DISTRICT = "Please retry internet connection not available"
-
+    static let ENTER_REGISTRATION_IMG = "Please upload registration certificate"
+    static let ENTER_POLLUTION_IMG = "Please upload pollution certificate"
+    static let ENTER_INSURANCE_IMG = "Please upload insurance certificate"
+    static let ENTER_COMMERCIAL_IMG = "Please upload commercial license"
+    
+    //Driver
+    static let ENTER_DRIVER_NAME = "Please enter driver's name"
+    static let ENTER_DRIVER_NUMBER = "Please enter driver's phone no."
+    static let ENTER_DRIVER_PHOTO = "Please upload driver's photo"
+    static let ENTER_DRIVING_LICENSE = "Please upload commercial driving license"
+    static let ENTER_AADHAR_FRONT = "Please upload aadhar front"
+    static let ENTER_AADHAR_BACK = "Please upload aadhar back"
+    //Helper
+    static let ENTER_HELPER_NAME = "Please enter helper's name"
+    static let ENTER_HELPER_NUMBER = "Please enter helper's phone no."
+    static let ENTER_HELPER_PHOTO = "Please upload helper's photo"
+    //Supervisor
+    static let ENTER_SUPERVISOR_NAME = "Please enter supervisor's name"
+    static let ENTER_SUPERVISOR_NUMBER = "Please enter supervisor's phone no."
+    static let ENTER_SUPERVISOR_PHOTO = "Please upload supervisor's photo"
 }
 
 struct Strings {
@@ -213,18 +234,24 @@ struct WSRequestParams {
     static let WS_REQS_PARAM_PROJECT_ID          = "project_id"
     static let WS_REQS_PARAM_ASM_REMARKS         = "asm_remarks"
     
-//    static let WS_REQS_PARAM_TRIP_TYPE               = "trip_type"
-//    static let WS_REQS_PARAM_JOURNEY_TYPE            = "JourneyType"
-//    static let WS_REQS_PARAM_REMARKS                 = "Remarks"
-//    static let WS_REQS_PARAM_PLAN_TYPE               = "PlanType"
-//    static let WS_REQS_PARAM_TRAVELSTART             = "TravelStartDate"
-//    static let WS_REQS_PARAM_PAX_AGE                 = "PaxAge"
-//    static let WS_REQS_PARAM_NO_OF_PAX               = "NoOfPax"
-//    static let WS_REQS_PARAM_TRAVEL_END              = "TravelEndDate"
-//    static let WS_REQS_PARAM_ROOM_REF                = "room_reference"
-//    static let WS_REQS_PARAM_REQUEST_TYPE            = "RequestType"
-//    static let WS_REQS_PARAM_PLANCOVERAGE            = "PlanCoverage"
-//    static let WS_REQS_PARAM_TRANSACTIONFEE          = "TransactionFee"
+    //Van Registration
+    static let WS_REQS_PARAM_REG_CERT               = "reg_certificate_no"
+    static let WS_REQS_PARAM_POPULATION_CERT        = "population_certificate_no"
+    static let WS_REQS_PARAM_INSURANCE_NO           = "insurance_certificate_no"
+    static let WS_REQS_PARAM_VAN_NUM                = "van_number"
+    static let WS_REQS_PARAM_COMMERCIAL_LICENSE_NO  = "commercial_licence_no"
+    static let WS_REQS_PARAM_POPULATION_IMG         = "population_certificate_image"
+    static let WS_REQS_PARAM_INSURANCE_IMG          = "insurance_certificate_image"
+    static let WS_REQS_PARAM_COMMERCIAL_IMG         = "commercial_licence_image"
+    static let WS_REQS_PARAM_REG_IMG                = "reg_certificate_image"
+    
+    //Driver Registration
+    static let WS_REQS_PARAM_PHONE                  = "phone"
+    static let WS_REQS_PARAM_NAME                   = "name"
+    static let WS_REQS_PARAM_VAN_ID                 = "van_id"
+    static let WS_REQS_PARAM_AADHAAR                = "aadhar"
+    static let WS_REQS_PARAM_AADHAAR_BACK           = "aadharb"
+    static let WS_REQS_PARAM_DRIVER_LICENSE         = "driving_licence"
 }
 
 struct WSResponseParams {

@@ -20,7 +20,7 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
         super.init()
         let cameraAction = UIAlertAction(title: "Camera", style: .default){
             UIAlertAction in
-          //  self.openCamera((UIImage) -> ())
+            self.openCamera()
         }
         let galleryAction = UIAlertAction(title: "Gallery", style: .default){
             UIAlertAction in
@@ -45,12 +45,11 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
 
         viewController.present(alert, animated: true, completion: nil)
     }
-    func openCamera(_ viewController: UIViewController, _ callback: @escaping ((UIImage) -> ())){
+    func openCamera(){
         alert.dismiss(animated: true, completion: nil)
         if(UIImagePickerController .isSourceTypeAvailable(.camera)){
             picker.sourceType = .camera
-            pickImageCallback = callback
-            viewController.present(picker, animated: true, completion: nil)
+            self.viewController!.present(picker, animated: true, completion: nil)
         } else {
             let alertController: UIAlertController = {
                 let controller = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
@@ -58,7 +57,7 @@ class ImagePickerManager: NSObject, UIImagePickerControllerDelegate, UINavigatio
                 controller.addAction(action)
                 return controller
             }()
-            viewController.present(alertController, animated: true)
+            viewController?.present(alertController, animated: true)
         }
     }
     func openGallery(){

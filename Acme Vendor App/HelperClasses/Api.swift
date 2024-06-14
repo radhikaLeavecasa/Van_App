@@ -38,6 +38,7 @@ enum Api: Equatable {
     case promotorApi
     case driverApi
     case helperApi
+    case vanDetail(_ vanNo: String)
    
     func rawValued() -> String {
         switch self {
@@ -78,6 +79,9 @@ enum Api: Equatable {
             return "supervisor-rejected-project/\(code)"
         case let .supervisorPending(code):
             return "supervisor-pending-project/\(code)"
+            
+        case let .vanDetail(vanNo):
+            return "van-details/\(vanNo)"
             
         case .acceptReject:
             return "asm-approval"

@@ -7,39 +7,26 @@
 
 import UIKit
 import Alamofire
+import ObjectMapper
 
 class HomeVM: NSObject {
+    var vanDetail: VanDetailModel?
     
-    var homeModel: FetchDataModel?
-    
-    func fetchApi(_ code: String, _ completion: @escaping (Bool,String) -> Void) {
+    func getVanDetailsApi(_ vanNo: String, completion: @escaping(Bool, String) -> Void) {
         Proxy.shared.loadAnimation()
-        WebService.callApi(api: .fetchApi(code), method: .get, param: [:], header: true) { status, msg, response in
+        WebService.callApi(api: .vanDetail(vanNo), method: .get, param: [:]) { status, msg, response in
             Proxy.shared.stopAnimation()
             if status == true {
                 if let data = response as? [String:Any] {
-                    if let data2 = data["data"] as? [String:Any] {
-                        self.homeModel = FetchDataModel(JSON: data2)
-                        completion(true, "")
+                    if let data = data["data"] as? [String: Any] {
+                        if let data = Mapper<VanDetailModel>().map(JSON: data) as VanDetailModel? {
+                            self.vanDetail = data
+                        }
                     }
+                    completion(true, "")
                 }
             } else {
-                completion(false, msg)
-            }
-        }
-    }
-    
-    
-    func uploadSiteDetails(param:[String:Any],dictImage: [String: UIImage], _ completion: @escaping (Bool,String) -> Void){
-        Proxy.shared.loadAnimation()
-        WebService.uploadImageWithURL(api: .uploadSiteDetails, dictImage: dictImage, parameter: param) { status, msg, response in
-            Proxy.shared.stopAnimation()
-            if status == true {
-                if let data = response as? [String:Any] {
-                    completion(true, msg)
-                }
-            }else{
-                completion(false, msg)
+                completion(true, msg)
             }
         }
     }

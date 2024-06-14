@@ -24,16 +24,16 @@ class ListingVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         if Cookies.userInfo()?.type == 1 {
-            btnAdd.isHidden = true
+            btnAdd.isHidden = false
             viewModel.getPostVanApi(.get, completion: { val, msg in
                 if val {
-//                    if self.viewModel.arrListing?.count == 0 {
-//                        self.lblNoDataFound.isHidden = false
-//                        self.collVwSites.isHidden = true
-//                    } else {
-//                        self.lblNoDataFound.isHidden = true
-//                        self.collVwSites.isHidden = false
-//                    }
+                    if self.viewModel.arrListing.count == 0 {
+                        self.lblNoDataFound.isHidden = false
+                        self.collVwSites.isHidden = true
+                    } else {
+                        self.lblNoDataFound.isHidden = true
+                        self.collVwSites.isHidden = false
+                    }
                     self.collVwSites.reloadData()
                 } else {
                     if msg == CommonError.INTERNET {
@@ -44,7 +44,7 @@ class ListingVC: UIViewController {
                 }
             })
         } else if Cookies.userInfo()?.type == 2 {
-            btnAdd.isHidden = false
+            btnAdd.isHidden = true
             
         }
     }
@@ -90,7 +90,7 @@ class ListingVC: UIViewController {
 
 extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        collectionView == collVwOptions ? arrHeader.count : 0
+        collectionView == collVwOptions ? arrHeader.count : selectedIndex == 0 ? viewModel.arrListing.count : selectedIndex == 1 ? viewModel.arrDriverList.count : selectedIndex == 2 ? viewModel.arrHelperList.count : viewModel.arrSupervisorList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -102,8 +102,20 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SiteCVC", for: indexPath) as! SiteCVC
-//            cell.lblShopName.text = viewModel.arrListing?[indexPath.row].retailName
-//            cell.imgVwSite.sd_setImage(with: URL(string: "\(imageBaseUrl)\(viewModel.arrListing?[indexPath.row].image1 ?? "")"), placeholderImage: .placeholderImage())
+            if selectedIndex == 0 {
+                cell.lblShopName.text = "Van No: \(viewModel.arrListing[indexPath.row].vanNumber ?? "")"
+                cell.imgVwSite.image = UIImage(named: "ic_van_placeholder")
+            } else if selectedIndex == 1 {
+                cell.lblShopName.text = viewModel.arrDriverList[indexPath.row].name
+                cell.imgVwSite.sd_setImage(with: URL(string: "\(imageBaseUrl)\(viewModel.arrDriverList[indexPath.row].image ?? "")"), placeholderImage: .placeholderImage())
+            } else if selectedIndex == 2 {
+                cell.lblShopName.text = viewModel.arrHelperList[indexPath.row].name
+                cell.imgVwSite.sd_setImage(with: URL(string: "\(imageBaseUrl)\(viewModel.arrHelperList[indexPath.row].image ?? "")"), placeholderImage: .placeholderImage())
+            } else {
+                cell.lblShopName.text = viewModel.arrSupervisorList[indexPath.row].name
+                cell.imgVwSite.sd_setImage(with: URL(string: "\(imageBaseUrl)\(viewModel.arrSupervisorList[indexPath.row].image ?? "")"), placeholderImage: .placeholderImage())
+            }
+           
             return cell
         }
     }
@@ -114,7 +126,7 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             label.sizeToFit()
             return CGSize(width: label.frame.width+15, height: self.collVwOptions.frame.size.height)
         } else {
-            if indexPath.row == 0 {
+            if selectedIndex != 0 {
                 return CGSize(width: self.collVwSites.frame.size.width/2, height: self.collVwSites.frame.size.width/2)
             } else {
                 return CGSize(width: self.collVwSites.frame.size.width, height: self.collVwSites.frame.size.width/2)
@@ -129,13 +141,13 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             case 0:
                 viewModel.getPostVanApi(.get, completion: { val, msg in
                     if val {
-    //                    if self.viewModel.arrListing?.count == 0 {
-    //                        self.lblNoDataFound.isHidden = false
-    //                        self.collVwSites.isHidden = true
-    //                    } else {
-    //                        self.lblNoDataFound.isHidden = true
-    //                        self.collVwSites.isHidden = false
-    //                    }
+                        if self.viewModel.arrListing.count == 0 {
+                            self.lblNoDataFound.isHidden = false
+                            self.collVwSites.isHidden = true
+                        } else {
+                            self.lblNoDataFound.isHidden = true
+                            self.collVwSites.isHidden = false
+                        }
                         self.collVwSites.reloadData()
                     } else {
                         if msg == CommonError.INTERNET {
@@ -148,13 +160,13 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             case 1:
                 viewModel.getPostDriverApi(.get, completion: { val, msg in
                     if val {
-    //                    if self.viewModel.arrListing?.count == 0 {
-    //                        self.lblNoDataFound.isHidden = false
-    //                        self.collVwSites.isHidden = true
-    //                    } else {
-    //                        self.lblNoDataFound.isHidden = true
-    //                        self.collVwSites.isHidden = false
-    //                    }
+                        if self.viewModel.arrDriverList.count == 0 {
+                            self.lblNoDataFound.isHidden = false
+                            self.collVwSites.isHidden = true
+                        } else {
+                            self.lblNoDataFound.isHidden = true
+                            self.collVwSites.isHidden = false
+                        }
                         self.collVwSites.reloadData()
                     } else {
                         if msg == CommonError.INTERNET {
@@ -167,13 +179,13 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             case 2:
                 viewModel.getPostHelperApi(.get, completion: { val, msg in
                     if val {
-    //                    if self.viewModel.arrListing?.count == 0 {
-    //                        self.lblNoDataFound.isHidden = false
-    //                        self.collVwSites.isHidden = true
-    //                    } else {
-    //                        self.lblNoDataFound.isHidden = true
-    //                        self.collVwSites.isHidden = false
-    //                    }
+                        if self.viewModel.arrHelperList.count == 0 {
+                            self.lblNoDataFound.isHidden = false
+                            self.collVwSites.isHidden = true
+                        } else {
+                            self.lblNoDataFound.isHidden = true
+                            self.collVwSites.isHidden = false
+                        }
                         self.collVwSites.reloadData()
                     } else {
                         if msg == CommonError.INTERNET {
@@ -186,13 +198,13 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             default:
                 viewModel.getPostSupervisorApi(.get, completion: { val, msg in
                     if val {
-    //                    if self.viewModel.arrListing?.count == 0 {
-    //                        self.lblNoDataFound.isHidden = false
-    //                        self.collVwSites.isHidden = true
-    //                    } else {
-    //                        self.lblNoDataFound.isHidden = true
-    //                        self.collVwSites.isHidden = false
-    //                    }
+                        if self.viewModel.arrSupervisorList.count == 0 {
+                            self.lblNoDataFound.isHidden = false
+                            self.collVwSites.isHidden = true
+                        } else {
+                            self.lblNoDataFound.isHidden = true
+                            self.collVwSites.isHidden = false
+                        }
                         self.collVwSites.reloadData()
                     } else {
                         if msg == CommonError.INTERNET {
@@ -206,9 +218,10 @@ extension ListingVC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             collVwOptions.reloadData()
 
         } else {
-//            let vc = ViewControllerHelper.getViewController(ofType: .SiteDetailVC, StoryboardName: .Main) as! SiteDetailVC
-//            vc.siteDetail = viewModel.arrListing?[indexPath.row]
-//            self.pushView(vc: vc)
+            let vc = ViewControllerHelper.getViewController(ofType: .HomeVC, StoryboardName: .Main) as! HomeVC
+            vc.vanNo = viewModel.arrListing[indexPath.row].vanNumber ?? ""
+            vc.type = selectedIndex
+            self.pushView(vc: vc)
         }
     }
 }

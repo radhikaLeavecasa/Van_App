@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1E70D25342BF60EDD0195ACC /* Pods_Acme_Vendor_App_Acme_Vendor_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7482FBF7BCF44BAF354FDBC2 /* Pods_Acme_Vendor_App_Acme_Vendor_AppUITests.framework */; };
 		642D4EC2F704ADF4AB9A00E0 /* Pods_Acme_Vendor_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D6BA15AEDFB8D3192ADAC6 /* Pods_Acme_Vendor_App.framework */; };
+		7212E7872C1C22DA006F498F /* RegisterDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7212E7862C1C22DA006F498F /* RegisterDetailsVM.swift */; };
+		7212E7892C1C696D006F498F /* VanDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7212E7882C1C696D006F498F /* VanDetailModel.swift */; };
 		7213E5C92C19AF0F00773DDD /* AlertThankyouVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213E5C82C19AF0F00773DDD /* AlertThankyouVC.swift */; };
 		7213E5CB2C19B8B700773DDD /* AddPhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213E5CA2C19B8B700773DDD /* AddPhotosVC.swift */; };
 		7213E5CD2C19B8E200773DDD /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7213E5CC2C19B8E200773DDD /* MapVC.swift */; };
@@ -88,6 +90,8 @@
 		038B600A993E8AFF66D475C4 /* Pods_Acme_Vendor_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Acme_Vendor_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EE0F8ED207142E78679492F /* Pods-Acme Vendor App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acme Vendor App.debug.xcconfig"; path = "Target Support Files/Pods-Acme Vendor App/Pods-Acme Vendor App.debug.xcconfig"; sourceTree = "<group>"; };
 		23F37DF6EF391F35AAFA3CEE /* Pods-Acme Vendor App-Acme Vendor AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Acme Vendor App-Acme Vendor AppUITests.release.xcconfig"; path = "Target Support Files/Pods-Acme Vendor App-Acme Vendor AppUITests/Pods-Acme Vendor App-Acme Vendor AppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7212E7862C1C22DA006F498F /* RegisterDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDetailsVM.swift; sourceTree = "<group>"; };
+		7212E7882C1C696D006F498F /* VanDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VanDetailModel.swift; sourceTree = "<group>"; };
 		7213E5C82C19AF0F00773DDD /* AlertThankyouVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertThankyouVC.swift; sourceTree = "<group>"; };
 		7213E5CA2C19B8B700773DDD /* AddPhotosVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotosVC.swift; sourceTree = "<group>"; };
 		7213E5CC2C19B8E200773DDD /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 				7251E5732C0EE3AC00A900CE /* HomeVM.swift */,
 				72EC85592C13495100BA6CF7 /* SiteDetailVM.swift */,
 				7251E5862C0F252800A900CE /* LoginVM.swift */,
+				7212E7862C1C22DA006F498F /* RegisterDetailsVM.swift */,
 				7213E5D02C19CFBB00773DDD /* ListingVM.swift */,
 				7251E5882C0F293400A900CE /* OtpVM.swift */,
 			);
@@ -219,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				7251E57E2C0EEA5B00A900CE /* FetchDataModel.swift */,
+				7212E7882C1C696D006F498F /* VanDetailModel.swift */,
 				72E3D2062C131D580041929A /* ListingModel.swift */,
 			);
 			path = Model;
@@ -648,6 +654,7 @@
 				7251E5A32C0F2F4D00A900CE /* NSDate+Timepiece.swift in Sources */,
 				7213E5CB2C19B8B700773DDD /* AddPhotosVC.swift in Sources */,
 				72582C9F2C102D1000A4CEF1 /* NVActivityIndicatorViewable.swift in Sources */,
+				7212E7872C1C22DA006F498F /* RegisterDetailsVM.swift in Sources */,
 				7251E5A12C0F2F4D00A900CE /* Int+Timepiece.swift in Sources */,
 				7213E5D12C19CFBB00773DDD /* ListingVM.swift in Sources */,
 				7251E5A22C0F2F4D00A900CE /* Duration.swift in Sources */,
@@ -664,6 +671,7 @@
 				7213E5D32C19D9FE00773DDD /* VehicleRegisPopUpVC.swift in Sources */,
 				72E3D2092C131E500041929A /* Cookies.swift in Sources */,
 				72E3D2072C131D580041929A /* ListingModel.swift in Sources */,
+				7212E7892C1C696D006F498F /* VanDetailModel.swift in Sources */,
 				7271F4F12C0DDC1A00372593 /* AppDelegate.swift in Sources */,
 				7251E5782C0EE7AB00A900CE /* Proxy.swift in Sources */,
 				72582CA22C102D6700A4CEF1 /* WWCalendarTimeSelector.swift in Sources */,
@@ -859,9 +867,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Acme Vendor App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Acme Van App";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Propdub would like to access your camera to upload site pictures";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Propdub wants to use your location to fetch latitude and longitude";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Propdub wants to use your location to fetch latitude and longitude";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Acme Van would like to access your gallery to upload pictures";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Acme Van would like to access your camera to upload pictures";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Acme Van wants to use your location to fetch latitude and longitude";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Acme Van wants to use your location to fetch latitude and longitude";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Acme Van would like to access your gallery to upload pictures";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -894,9 +904,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Acme Vendor App/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Acme Van App";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Propdub would like to access your camera to upload site pictures";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Propdub wants to use your location to fetch latitude and longitude";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Propdub wants to use your location to fetch latitude and longitude";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Acme Van would like to access your gallery to upload pictures";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Acme Van would like to access your camera to upload pictures";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Acme Van wants to use your location to fetch latitude and longitude";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Acme Van wants to use your location to fetch latitude and longitude";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Acme Van would like to access your gallery to upload pictures";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

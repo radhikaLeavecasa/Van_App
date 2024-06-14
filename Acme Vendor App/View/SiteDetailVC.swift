@@ -45,44 +45,43 @@ class SiteDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setData()
-//        cnstHeightBottomStack.constant = Cookies.userInfo()?.type == "asm" ? 50 : 0
-//        vwStackView.isHidden = Cookies.userInfo()?.type != "asm"
+
     }
     //MARK: - Custom method
     func setData(){
-        txtFldlocation.text = siteDetail?.location
-        txtFldProjectName.text = siteDetail?.project
-        txtFldState.text = siteDetail?.state
-        txtFldDistrict.text = siteDetail?.district
-        txtFldCity.text = siteDetail?.city
-        txtFldRetailName.text = siteDetail?.retailName
-        txtFldLatitude.text = siteDetail?.latitude
-        txtFldLongitude.text = siteDetail?.longitude
-        txtFldHeight.text = siteDetail?.length
-        txtFldWidth.text = siteDetail?.width
-        txtFldDate.text = siteDetail?.date
-        txtFldOwnerName.text = siteDetail?.ownerName
-        txtFldEmail.text = siteDetail?.email
-        txtFldMobile.text = siteDetail?.mobile
-        txtFldRemarks.text = siteDetail?.remarks == nil ? "No Remarks" : siteDetail?.remarks
-        txtFldYourName.text = siteDetail?.retailerCode
-        txtFldSqFt.text = siteDetail?.area
-        txtFldAsmName.text = siteDetail?.asmName
-        txtFldAsmNumber.text = siteDetail?.asmMobile
-        imgVwSignature.sd_setImage(with: URL(string: "\(imageBaseUrl)\(siteDetail?.ownerSignature ?? "")"), placeholderImage: .placeholderImage())
-        
-        arrImages.append("\(imageBaseUrl)\(siteDetail?.image ?? "")")
-        arrImages.append("\(imageBaseUrl)\(siteDetail?.image1 ?? "")")
-        arrImages.append("\(imageBaseUrl)\(siteDetail?.image2 ?? "")")
-        arrImages.append("\(imageBaseUrl)\(siteDetail?.image3 ?? "")")
-        arrImages.append("\(imageBaseUrl)\(siteDetail?.image4 ?? "")")
-        
-        btnReject.isHidden = ((siteDetail?.asmStatus?.range(of: "approved", options: .caseInsensitive)) != nil)
-        btnApprove.setTitle(((siteDetail?.asmStatus?.range(of: "approved", options: .caseInsensitive)) != nil) ? "Approved" : "Approve", for: .normal)
-        btnApprove.isUserInteractionEnabled = ((siteDetail?.asmStatus?.range(of: "approved", options: .caseInsensitive)) != nil) ? false : true
-        btnApprove.isHidden = ((siteDetail?.asmStatus?.range(of: "rejected", options: .caseInsensitive)) != nil)
-        btnReject.setTitle(((siteDetail?.asmStatus?.range(of: "rejected", options: .caseInsensitive)) != nil) ? "Rejected" : "Reject", for: .normal)
-        btnReject.isUserInteractionEnabled = ((siteDetail?.asmStatus?.range(of: "rejected", options: .caseInsensitive)) != nil) ? false : true
+//        txtFldlocation.text = siteDetail?.location
+//        txtFldProjectName.text = siteDetail?.project
+//        txtFldState.text = siteDetail?.state
+//        txtFldDistrict.text = siteDetail?.district
+//        txtFldCity.text = siteDetail?.city
+//        txtFldRetailName.text = siteDetail?.retailName
+//        txtFldLatitude.text = siteDetail?.latitude
+//        txtFldLongitude.text = siteDetail?.longitude
+//        txtFldHeight.text = siteDetail?.length
+//        txtFldWidth.text = siteDetail?.width
+//        txtFldDate.text = siteDetail?.date
+//        txtFldOwnerName.text = siteDetail?.ownerName
+//        txtFldEmail.text = siteDetail?.email
+//        txtFldMobile.text = siteDetail?.mobile
+//        txtFldRemarks.text = siteDetail?.remarks == nil ? "No Remarks" : siteDetail?.remarks
+//        txtFldYourName.text = siteDetail?.retailerCode
+//        txtFldSqFt.text = siteDetail?.area
+//        txtFldAsmName.text = siteDetail?.asmName
+//        txtFldAsmNumber.text = siteDetail?.asmMobile
+//        imgVwSignature.sd_setImage(with: URL(string: "\(imageBaseUrl)\(siteDetail?.ownerSignature ?? "")"), placeholderImage: .placeholderImage())
+//        
+//        arrImages.append("\(imageBaseUrl)\(siteDetail?.image ?? "")")
+//        arrImages.append("\(imageBaseUrl)\(siteDetail?.image1 ?? "")")
+//        arrImages.append("\(imageBaseUrl)\(siteDetail?.image2 ?? "")")
+//        arrImages.append("\(imageBaseUrl)\(siteDetail?.image3 ?? "")")
+//        arrImages.append("\(imageBaseUrl)\(siteDetail?.image4 ?? "")")
+//        
+//        btnReject.isHidden = ((siteDetail?.asmStatus?.range(of: "approved", options: .caseInsensitive)) != nil)
+//        btnApprove.setTitle(((siteDetail?.asmStatus?.range(of: "approved", options: .caseInsensitive)) != nil) ? "Approved" : "Approve", for: .normal)
+//        btnApprove.isUserInteractionEnabled = ((siteDetail?.asmStatus?.range(of: "approved", options: .caseInsensitive)) != nil) ? false : true
+//        btnApprove.isHidden = ((siteDetail?.asmStatus?.range(of: "rejected", options: .caseInsensitive)) != nil)
+//        btnReject.setTitle(((siteDetail?.asmStatus?.range(of: "rejected", options: .caseInsensitive)) != nil) ? "Rejected" : "Reject", for: .normal)
+//        btnReject.isUserInteractionEnabled = ((siteDetail?.asmStatus?.range(of: "rejected", options: .caseInsensitive)) != nil) ? false : true
 
 
         
