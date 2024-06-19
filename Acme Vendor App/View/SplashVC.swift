@@ -22,6 +22,7 @@ class SplashVC: UIViewController {
                     self.setView(vc: vc)
                 } else if Cookies.userInfo()?.type == 3 { //Supervisor
                     let vc = ViewControllerHelper.getViewController(ofType: .HomeVC, StoryboardName: .Main) as! HomeVC
+                    vc.isStart = true
                     self.setView(vc: vc)
                 }
             } else{

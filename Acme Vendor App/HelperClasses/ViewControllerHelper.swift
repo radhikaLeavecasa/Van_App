@@ -17,6 +17,7 @@ enum ViewControllerType : String {
     
     case WWCalendarTimeSelector
     case HomeVC
+    case VehicleRegisPopUpVC
     case SplashVC
     case LoginVC
     case OtpVC
@@ -26,6 +27,7 @@ enum ViewControllerType : String {
     case ListingVC
     case AddDetailsVC
     case RegisterDetailsVC
+    case AddPhotosVC
 }
 
 class ViewControllerHelper: NSObject {

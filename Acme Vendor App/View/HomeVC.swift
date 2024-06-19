@@ -13,6 +13,8 @@ import SDWebImage
 class HomeVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     //MARK: - @IBOutlets
+    @IBOutlet weak var btnChangeRequest: UIButton!
+    @IBOutlet weak var btnVwLocation: UIButton!
     @IBOutlet weak var vwStackSupervisor: UIStackView!
     @IBOutlet weak var vwStackHelper: UIStackView!
     @IBOutlet weak var vwStackDriver: UIStackView!
@@ -49,33 +51,38 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate & UINavigationCo
     var arrHeader = ["Van Details", "Driver Details", "Helper Details", "Supervisor Details"]
     var selectedTab = 0
     var selectedIndex = 0
+    var isStart = false
     //MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collVwImages.registerNib(nibName: "SiteCVC")
-        viewModel.getVanDetailsApi(vanNo) { val, msg in
-            self.selectedVanTab()
-            if self.viewModel.vanDetail?.activity?.count == 0 {
-                self.vwHeader.isHidden = true
-                self.vwStackHeight.constant = 0
-            } else {
-                let activity = self.viewModel.vanDetail?.activity?.filter({self.convertStringToDate($0.createdAt ?? "") == Date()})
-                if activity?.count ?? 0 > 0 {
-                    self.arrVanImages.append("\(imageBaseUrl)\(activity?[0].frontImage ?? "")")
-                    self.arrVanImages.append("\(imageBaseUrl)\(activity?[0].backImage ?? "")")
-                    self.arrVanImages.append("\(imageBaseUrl)\(activity?[0].rightImage ?? "")")
-                    self.arrVanImages.append("\(imageBaseUrl)\(activity?[0].leftImage ?? "")")
-                    
-                    self.arrMeterImages.append("\(imageBaseUrl)\(activity?[0].meterImage ?? "")")
-                    self.vwHeader.isHidden = false
-                    self.vwStackHeight.constant = 350
-                } else {
-                    self.vwHeader.isHidden = true
-                    self.vwStackHeight.constant = 0
+        collVwImages.registerNib(nibName: "SiteImagesXIB")
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if Cookies.userInfo()?.type == 3 {
+            btnChangeRequest.isHidden = false
+            btnVwLocation.setTitle("Start Day", for: .normal)
+            let vc = ViewControllerHelper.getViewController(ofType: .VehicleRegisPopUpVC, StoryboardName: .Main) as! VehicleRegisPopUpVC
+            self.vwHeader.isHidden = true
+            self.vwStackHeight.constant = 0
+            if isStart {
+                vc.modalPresentationStyle = .overFullScreen
+                vc.modalTransitionStyle = .crossDissolve
+                vc.remarksDelegate = {
+                    val in
+                    self.vanNo = val
+                    self.handleApi(vanNo: val)
                 }
+                self.present(vc, animated: true)
+            } else {
+                self.handleApi(vanNo: vanNo)
+                btnVwLocation.setTitle("Completed", for: .normal)
             }
-            self.collVwImages.reloadData()
+        } else {
+            btnChangeRequest.isHidden = true
+            btnVwLocation.setTitle("View Loaction", for: .normal)
+            handleApi(vanNo: vanNo)
         }
     }
     //MARK: - @IBActions
@@ -111,24 +118,85 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate & UINavigationCo
         }
     }
     @IBAction func actionViewLocation(_ sender: Any) {
+        if Cookies.userInfo()?.type == 3 && btnVwLocation.currentTitle != "Completed" {
+            let vc = ViewControllerHelper.getViewController(ofType: .AddPhotosVC, StoryboardName: .Main) as! AddPhotosVC
+            vc.vanNumber = self.vanNo
+            vc.vanId = self.viewModel.vanDetail?.id ?? 0
+            vc.type = btnVwLocation.currentTitle ?? ""
+            self.pushView(vc: vc)
+        }
+    }
+    
+    @IBAction func actionChangeRequest(_ sender: Any) {
     }
     
     @IBAction func actionVanMeter(_ sender: UIButton) {
         selectedTab = sender.tag
         for btn in btnMeterVan {
             if sender.tag == btn.tag {
-                btnMeterVan[sender.tag].setTitleColor(.white, for: .normal)
-                btnMeterVan[sender.tag].backgroundColor = .APP_BLUE_CLR
+                btnMeterVan[btn.tag].setTitleColor(.white, for: .normal)
+                btnMeterVan[btn.tag].backgroundColor = .APP_BLUE_CLR
             } else {
-                btnMeterVan[sender.tag].setTitleColor(.black, for: .normal)
-                btnMeterVan[sender.tag].backgroundColor = .APP_GRAY_CLR
+                btnMeterVan[btn.tag].setTitleColor(.black, for: .normal)
+                btnMeterVan[btn.tag].backgroundColor = .APP_GRAY_CLR
             }
         }
+        vwPageControll.isHidden = sender.tag == 1
         collVwImages.reloadData()
+    }
+    func handleApi(vanNo: String) {
+        viewModel.getVanDetailsApi(vanNo) { val, msg in
+            self.selectedVanTab()
+            if self.viewModel.vanDetail?.activity?.count == 0 {
+                self.vwHeader.isHidden = true
+                self.vwStackHeight.constant = 0
+            } else {
+                if let activities = self.viewModel.vanDetail?.activity {
+                    // Filter activities based on matching dates (ignoring time)
+                    let filteredActivities = activities.filter { activity in
+                        guard let createdAtString = activity.createdAt else { return false }
+                        let activityDate = self.convertStringToDate(createdAtString)
+                        
+                        let calendar = Calendar.current
+                        let currentDate = Date()
+                        
+                        let activityComponents = calendar.dateComponents([.year, .month, .day], from: activityDate)
+                        let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
+                        
+                        return activityComponents.year == currentComponents.year &&
+                               activityComponents.month == currentComponents.month &&
+                               activityComponents.day == currentComponents.day
+                    }
+                    
+                    if filteredActivities.count > 0 {
+                        // Append images from the first matching activity
+                        if let firstActivity = filteredActivities.first {
+                            self.arrVanImages.append("\(imageBaseUrl)\(firstActivity.frontImage ?? "")")
+                            self.arrVanImages.append("\(imageBaseUrl)\(firstActivity.backImage ?? "")")
+                            self.arrVanImages.append("\(imageBaseUrl)\(firstActivity.leftImage ?? "")")
+                            self.arrVanImages.append("\(imageBaseUrl)\(firstActivity.rightImage ?? "")")
+                            
+                            self.arrMeterImages.append("\(imageBaseUrl)\(firstActivity.meterImage ?? "")")
+                            self.vwHeader.isHidden = false
+                            self.vwStackHeight.constant = 350
+                            self.btnVwLocation.setTitle("End Day", for: .normal)
+                        }
+                    } else {
+                        self.vwHeader.isHidden = true
+                        self.vwStackHeight.constant = 0
+                    }
+                }
+            }
+            self.vwPageControll.drawer = ScaleDrawer(numberOfPages: self.arrVanImages.count, height: 10, width: 10, space: 10, raduis: 10, currentItem: 0, indicatorColor: .white, dotsColor: .clear, isBordered: true, borderColor: .white, borderWidth: 1.0, indicatorBorderColor: .white, indicatorBorderWidth: 1.0)
+            self.vwPageControll.numberOfPages = self.arrVanImages.count
+            DispatchQueue.main.async {
+                self.collVwImages.reloadData()
+            }
+        }
     }
 }
 
-extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         collectionView == collVwDetails ? arrHeader.count : selectedTab == 0 ? arrVanImages.count : arrMeterImages.count
     }
@@ -141,7 +209,7 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.lblTitle.textColor = selectedIndex == indexPath.row ? .white : .APP_BLUE_CLR
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SiteCVC", for: indexPath) as! SiteCVC
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SiteImagesXIB", for: indexPath) as! SiteImagesXIB
             cell.imgVwSite.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.imgVwSite.sd_setImage(with: URL(string: selectedTab == 0 ? arrVanImages[indexPath.row] : arrMeterImages[indexPath.row]), placeholderImage: .placeholderImage())
             return cell
@@ -182,6 +250,24 @@ extension HomeVC: UICollectionViewDelegate, UICollectionViewDataSource {
                 }
             }
             collVwDetails.reloadData()
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == collVwDetails {
+            let label = UILabel(frame: CGRect.zero)
+            label.text = arrHeader[indexPath.item]
+            label.sizeToFit()
+            return CGSize(width: label.frame.width+15, height: self.collVwDetails.frame.size.height)
+        } else {
+            return CGSize(width: self.collVwImages.frame.size.width, height: self.collVwImages.frame.size.height)
+        }
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == collVwImages {
+            let offSet = scrollView.contentOffset.x
+            let width = scrollView.frame.width
+            let index = Int(round(offSet/width))
+            self.vwPageControll.setPage(index)
         }
     }
     func selectedVanTab(){

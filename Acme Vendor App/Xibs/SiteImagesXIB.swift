@@ -10,9 +10,5 @@ import UIKit
 class SiteImagesXIB: UICollectionViewCell {
 
     @IBOutlet weak var imgVwSite: UIImageView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
+    
 }

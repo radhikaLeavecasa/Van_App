@@ -11,4 +11,5 @@ class SiteCVC: UICollectionViewCell {
     
     @IBOutlet weak var lblShopName: UILabel!
     @IBOutlet weak var imgVwSite: UIImageView!
+    
 }

@@ -192,6 +192,11 @@ struct CommonMessage {
     static let ENTER_SUPERVISOR_NAME = "Please enter supervisor's name"
     static let ENTER_SUPERVISOR_NUMBER = "Please enter supervisor's phone no."
     static let ENTER_SUPERVISOR_PHOTO = "Please upload supervisor's photo"
+    
+    static let UPLOAD_VAN_PHOTO = "Please upload all images of van"
+    static let UPLOAD_METER_PHOTO = "Please upload meter reading photograph"
+    static let ENTER_START_KM = "Please enter start KM"
+    static let ENTER_END_KM = "Please enter end KM"
 }
 
 struct Strings {
@@ -234,6 +239,15 @@ struct WSRequestParams {
     static let WS_REQS_PARAM_PROJECT_ID          = "project_id"
     static let WS_REQS_PARAM_ASM_REMARKS         = "asm_remarks"
     
+    static let WS_REQS_PARAM_METER              = "meter"
+    static let WS_REQS_PARAM_FRONT_IMG          = "front_image"
+    static let WS_REQS_PARAM_BACK_IMG           = "back_image"
+    static let WS_REQS_PARAM_LEFT_IMG           = "left_image"
+    static let WS_REQS_PARAM_RIGHT_IMG          = "right_image"
+    static let WS_REQS_PARAM_METER_IMG          = "meter_image"
+    static let WS_REQS_PARAM_STATUS             = "status"
+    
+    
     //Van Registration
     static let WS_REQS_PARAM_REG_CERT               = "reg_certificate_no"
     static let WS_REQS_PARAM_POPULATION_CERT        = "population_certificate_no"
@@ -252,6 +266,14 @@ struct WSRequestParams {
     static let WS_REQS_PARAM_AADHAAR                = "aadhar"
     static let WS_REQS_PARAM_AADHAAR_BACK           = "aadharb"
     static let WS_REQS_PARAM_DRIVER_LICENSE         = "driving_licence"
+    
+    static let WS_REQS_PARAM_DAY_END_METER          = "day_end_meter"
+    static let WS_REQS_PARAM_DAY_END_IMG            = "day_end_meter_image"
+    static let WS_REQS_PARAM_DAY_END_LAT            = "day_end_lat"
+    static let WS_REQS_PARAM_DAY_END_LONG           = "day_end_long"
+    
+    
+    
 }
 
 struct WSResponseParams {

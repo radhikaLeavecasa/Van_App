@@ -58,6 +58,7 @@
 		7271F5272C0DE4B900372593 /* DMSans_24pt-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7271F5252C0DE4B900372593 /* DMSans_24pt-Medium.ttf */; };
 		729C7A1A2C1AD00700AFC90C /* AddDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729C7A192C1AD00700AFC90C /* AddDetailsVC.swift */; };
 		729C7A1C2C1ADE7F00AFC90C /* RegisterDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729C7A1B2C1ADE7F00AFC90C /* RegisterDetailsVC.swift */; };
+		729EF6F92C21B8D2001E4512 /* AddPhotoVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729EF6F82C21B8D2001E4512 /* AddPhotoVM.swift */; };
 		72E3D1FF2C13150C0041929A /* OptionsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3D1FE2C13150C0041929A /* OptionsCVC.swift */; };
 		72E3D2012C1315600041929A /* SiteCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3D2002C1315600041929A /* SiteCVC.swift */; };
 		72E3D2072C131D580041929A /* ListingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E3D2062C131D580041929A /* ListingModel.swift */; };
@@ -143,6 +144,7 @@
 		7271F5252C0DE4B900372593 /* DMSans_24pt-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans_24pt-Medium.ttf"; sourceTree = "<group>"; };
 		729C7A192C1AD00700AFC90C /* AddDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailsVC.swift; sourceTree = "<group>"; };
 		729C7A1B2C1ADE7F00AFC90C /* RegisterDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDetailsVC.swift; sourceTree = "<group>"; };
+		729EF6F82C21B8D2001E4512 /* AddPhotoVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoVM.swift; sourceTree = "<group>"; };
 		72E3D1FE2C13150C0041929A /* OptionsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsCVC.swift; sourceTree = "<group>"; };
 		72E3D2002C1315600041929A /* SiteCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteCVC.swift; sourceTree = "<group>"; };
 		72E3D2062C131D580041929A /* ListingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingModel.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				7251E57E2C0EEA5B00A900CE /* FetchDataModel.swift */,
 				7212E7882C1C696D006F498F /* VanDetailModel.swift */,
 				72E3D2062C131D580041929A /* ListingModel.swift */,
+				729EF6F82C21B8D2001E4512 /* AddPhotoVM.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				72EC85542C133A5D00BA6CF7 /* SiteDetailVC.swift in Sources */,
 				7251E5742C0EE3AC00A900CE /* HomeVM.swift in Sources */,
 				7251E56D2C0EE05F00A900CE /* ViewControllerHelper.swift in Sources */,
+				729EF6F92C21B8D2001E4512 /* AddPhotoVM.swift in Sources */,
 				7251E57F2C0EEA5B00A900CE /* FetchDataModel.swift in Sources */,
 				7251E5A52C0F2F4D00A900CE /* NSCalendar+Timepiece.swift in Sources */,
 				7251E5712C0EE36D00A900CE /* UIViewControllerExtension.swift in Sources */,
@@ -884,7 +888,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Acme.Acme-Vendor-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "Acme.Acme-Van-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -921,7 +925,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Acme.Acme-Vendor-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "Acme.Acme-Van-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
