@@ -41,6 +41,8 @@ enum Api: Equatable {
     case vanDetail(_ vanNo: String)
     case saveVanDetails
     case endDay
+    case mapLocations(_ vanNo: String)
+    case mapApi
    
     func rawValued() -> String {
         switch self {
@@ -63,6 +65,10 @@ enum Api: Equatable {
             return "van-details"
         case .endDay:
             return "day_end_updation"
+        case let .mapLocations(vanNo):
+            return "location/\(vanNo)"
+        case .mapApi:
+            return "https://api.wheelseye.com/currentLoc?accessToken=b6193ac9-d819-4e42-9b57-6c0663015b5f"
             
         case let .fetchApi(code):
             return "rcode/\(code)"

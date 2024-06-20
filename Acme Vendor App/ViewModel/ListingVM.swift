@@ -41,7 +41,7 @@ class ListingVM: NSObject {
                     completion(true, "")
                 }
             } else {
-                completion(true, msg)
+                completion(false, msg)
             }
         }
     }
@@ -58,7 +58,7 @@ class ListingVM: NSObject {
                     completion(true, "")
                 }
             } else {
-                completion(true, msg)
+                completion(false, msg)
             }
         }
     }
@@ -75,7 +75,7 @@ class ListingVM: NSObject {
                     completion(true, "")
                 }
             } else {
-                completion(true, msg)
+                completion(false, msg)
             }
         }
     }
@@ -92,7 +92,7 @@ class ListingVM: NSObject {
                     completion(true, "")
                 }
             } else {
-                completion(true, msg)
+                completion(false, msg)
             }
         }
     }

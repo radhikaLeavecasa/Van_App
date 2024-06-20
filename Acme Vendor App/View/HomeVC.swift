@@ -124,6 +124,11 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate & UINavigationCo
             vc.vanId = self.viewModel.vanDetail?.id ?? 0
             vc.type = btnVwLocation.currentTitle ?? ""
             self.pushView(vc: vc)
+        } else if Cookies.userInfo()?.type == 1 {
+            let vc = ViewControllerHelper.getViewController(ofType: .MapVC, StoryboardName: .Main) as! MapVC
+            vc.vanNo = vanNo
+            self.pushView(vc: vc)
+            
         }
     }
     

@@ -61,8 +61,12 @@ struct WebService{
     static func callApi(api:Api,method:HTTPMethod = .post,param:[String:Any],encoding:ParameterEncoding = URLEncoding.default,header:Bool = false,completion:@escaping(CompletionBlock)){
         
         if self.isConnectedToInternet(){
-            
-            let urlString = api.baseURl()
+            var urlString = String()
+            if api == .mapApi {
+                urlString = api.rawValued()
+            } else {
+                urlString = api.baseURl()
+            }
             debugPrint("******URL*****\(urlString) *****Parameters*****\(param)")
             
             var headers = HTTPHeaders()

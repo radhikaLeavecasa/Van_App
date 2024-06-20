@@ -28,6 +28,7 @@ enum ViewControllerType : String {
     case AddDetailsVC
     case RegisterDetailsVC
     case AddPhotosVC
+    case MapVC
 }
 
 class ViewControllerHelper: NSObject {

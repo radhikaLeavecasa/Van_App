@@ -26,7 +26,7 @@ class HomeVM: NSObject {
                     completion(true, "")
                 }
             } else {
-                completion(true, msg)
+                completion(false, msg)
             }
         }
     }

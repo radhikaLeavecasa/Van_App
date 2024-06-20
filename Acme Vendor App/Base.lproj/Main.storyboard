@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -2646,12 +2647,12 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="55"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_acme_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hgB-rf-x6u">
-                                        <rect key="frame" x="20" y="2" width="135" height="51"/>
+                                        <rect key="frame" x="45" y="2" width="135" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="135" id="anX-L2-A9d"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7P6-W0-5El">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7P6-W0-5El">
                                         <rect key="frame" x="338" y="2.6666666666666643" width="40" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="9KV-eK-LA0"/>
@@ -2659,16 +2660,29 @@
                                         </constraints>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="ic_logout"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hu-V1-wa9">
+                                        <rect key="frame" x="0.0" y="10" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="5F3-wK-gPW"/>
+                                            <constraint firstAttribute="height" constant="35" id="kPH-9D-AAY"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="ic_back"/>
                                         <connections>
-                                            <action selector="actionLogout:" destination="g5C-AU-DA3" eventType="touchUpInside" id="Q3w-Jb-Wff"/>
+                                            <action selector="actionBack:" destination="8Yk-Xf-0Iq" eventType="touchUpInside" id="G70-8g-6Vn"/>
+                                            <action selector="actionBack:" destination="g5C-AU-DA3" eventType="touchUpInside" id="LAO-h8-Zkd"/>
+                                            <action selector="actionBack:" destination="Olf-BH-Mcc" eventType="touchUpInside" id="Rd9-sg-xBk"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="APP_BLUE_CLR"/>
                                 <constraints>
+                                    <constraint firstItem="1hu-V1-wa9" firstAttribute="leading" secondItem="Tmm-YN-svL" secondAttribute="leading" id="3KY-Lz-DUw"/>
                                     <constraint firstAttribute="trailing" secondItem="7P6-W0-5El" secondAttribute="trailing" constant="15" id="9z7-YP-vzf"/>
-                                    <constraint firstItem="hgB-rf-x6u" firstAttribute="leading" secondItem="Tmm-YN-svL" secondAttribute="leading" constant="20" id="G34-xl-GZ0"/>
+                                    <constraint firstItem="hgB-rf-x6u" firstAttribute="leading" secondItem="1hu-V1-wa9" secondAttribute="trailing" constant="10" id="F9R-ZU-rFJ"/>
                                     <constraint firstAttribute="bottom" secondItem="hgB-rf-x6u" secondAttribute="bottom" constant="2" id="HFV-jn-UXd"/>
+                                    <constraint firstItem="1hu-V1-wa9" firstAttribute="centerY" secondItem="Tmm-YN-svL" secondAttribute="centerY" id="QrA-CF-vNh"/>
                                     <constraint firstItem="hgB-rf-x6u" firstAttribute="centerY" secondItem="Tmm-YN-svL" secondAttribute="centerY" id="gcy-xn-ekw"/>
                                     <constraint firstAttribute="height" constant="55" id="hQb-Y1-FEj"/>
                                     <constraint firstItem="7P6-W0-5El" firstAttribute="centerY" secondItem="hgB-rf-x6u" secondAttribute="centerY" id="pkm-jQ-LxM"/>
@@ -2681,46 +2695,46 @@
                                 <color key="tintColor" name="APP_BLUE_CLR"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B58-nG-vKE">
-                                <rect key="frame" x="20" y="134" width="353" height="614"/>
+                                <rect key="frame" x="0.0" y="129" width="393" height="689"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eji-C6-E8f">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="689"/>
+                                        <standardMapConfiguration key="preferredConfiguration"/>
+                                    </mapView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="eji-C6-E8f" firstAttribute="top" secondItem="B58-nG-vKE" secondAttribute="top" id="7ln-Ka-6A5"/>
+                                    <constraint firstAttribute="bottom" secondItem="eji-C6-E8f" secondAttribute="bottom" id="glM-tm-FQ9"/>
+                                    <constraint firstAttribute="trailing" secondItem="eji-C6-E8f" secondAttribute="trailing" id="nYc-yA-AOB"/>
+                                    <constraint firstItem="eji-C6-E8f" firstAttribute="leading" secondItem="B58-nG-vKE" secondAttribute="leading" id="shO-fS-xLH"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lBj-bx-8fD">
-                                <rect key="frame" x="0.0" y="768" width="393" height="50"/>
-                                <color key="backgroundColor" name="APP_BLUE_CLR"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="T1z-VU-3k9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="DMSans24pt-Medium" family="DM Sans 24pt" pointSize="18"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Day End">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="e14-ZN-V63"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lBj-bx-8fD" firstAttribute="top" secondItem="B58-nG-vKE" secondAttribute="bottom" constant="20" id="5VM-6X-all"/>
                             <constraint firstItem="lYq-Da-TfL" firstAttribute="top" secondItem="DEL-BG-8hY" secondAttribute="top" id="6jG-gb-j2H"/>
                             <constraint firstItem="Tmm-YN-svL" firstAttribute="top" secondItem="lYq-Da-TfL" secondAttribute="bottom" id="7sn-vw-zJS"/>
                             <constraint firstAttribute="trailing" secondItem="lYq-Da-TfL" secondAttribute="trailing" id="JG3-xd-x2Y"/>
                             <constraint firstItem="lYq-Da-TfL" firstAttribute="leading" secondItem="DEL-BG-8hY" secondAttribute="leading" id="K4E-pc-NIR"/>
-                            <constraint firstItem="lBj-bx-8fD" firstAttribute="leading" secondItem="e14-ZN-V63" secondAttribute="leading" id="KFf-bf-VzU"/>
                             <constraint firstItem="Tmm-YN-svL" firstAttribute="top" secondItem="e14-ZN-V63" secondAttribute="top" id="KLX-D1-XK9"/>
-                            <constraint firstItem="e14-ZN-V63" firstAttribute="trailing" secondItem="B58-nG-vKE" secondAttribute="trailing" constant="20" id="MFV-g7-JKc"/>
-                            <constraint firstAttribute="trailing" secondItem="lBj-bx-8fD" secondAttribute="trailing" id="QlP-Fw-Ame"/>
+                            <constraint firstItem="e14-ZN-V63" firstAttribute="trailing" secondItem="B58-nG-vKE" secondAttribute="trailing" id="MFV-g7-JKc"/>
+                            <constraint firstItem="e14-ZN-V63" firstAttribute="bottom" secondItem="B58-nG-vKE" secondAttribute="bottom" id="Sgy-aU-PM9"/>
                             <constraint firstAttribute="trailing" secondItem="Tmm-YN-svL" secondAttribute="trailing" id="T8v-pL-8HQ"/>
-                            <constraint firstItem="B58-nG-vKE" firstAttribute="leading" secondItem="e14-ZN-V63" secondAttribute="leading" constant="20" id="bRL-JA-7Wf"/>
-                            <constraint firstItem="B58-nG-vKE" firstAttribute="top" secondItem="Tmm-YN-svL" secondAttribute="bottom" constant="20" id="gWr-1s-JDm"/>
-                            <constraint firstItem="e14-ZN-V63" firstAttribute="bottom" secondItem="lBj-bx-8fD" secondAttribute="bottom" id="h3E-le-hKO"/>
+                            <constraint firstItem="B58-nG-vKE" firstAttribute="leading" secondItem="e14-ZN-V63" secondAttribute="leading" id="bRL-JA-7Wf"/>
+                            <constraint firstItem="B58-nG-vKE" firstAttribute="top" secondItem="Tmm-YN-svL" secondAttribute="bottom" constant="15" id="gWr-1s-JDm"/>
                             <constraint firstItem="Tmm-YN-svL" firstAttribute="leading" secondItem="e14-ZN-V63" secondAttribute="leading" id="lox-xT-uMv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapVw" destination="eji-C6-E8f" id="TE5-11-0GJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1G-iV-vmS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3228,7 +3242,7 @@ Uttar Pradesh</string>
                                                                     <rect key="frame" x="46.666666666666664" y="11" width="80.666666666666686" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Van" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rr-Pe-9sN">
-                                                                            <rect key="frame" x="25.000000000000011" y="5" width="50.666666666666643" height="20"/>
+                                                                            <rect key="frame" x="25.000000000000011" y="5" width="50.666666666666657" height="20"/>
                                                                             <fontDescription key="fontDescription" name="DMSans24pt-Regular" family="DM Sans 24pt" pointSize="13"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -3455,7 +3469,7 @@ Uttar Pradesh</string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqy-EV-Mpi">
-                                                                                <rect key="frame" x="0.0" y="19.000000000000007" width="223" height="41.000000000000007"/>
+                                                                                <rect key="frame" x="0.0" y="19.000000000000007" width="223" height="41"/>
                                                                                 <subviews>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Certificate No." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lPq-VT-JdV">
                                                                                         <rect key="frame" x="10" y="2" width="203" height="37"/>
@@ -3484,7 +3498,7 @@ Uttar Pradesh</string>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </view>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iV8-jb-euq">
-                                                                                <rect key="frame" x="233" y="19.000000000000007" width="80" height="41.000000000000007"/>
+                                                                                <rect key="frame" x="233" y="19.000000000000007" width="80" height="41"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="80" id="3E2-bW-R3j"/>
                                                                                 </constraints>
@@ -3609,7 +3623,7 @@ Uttar Pradesh</string>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GR0-yg-EWz">
-                                                                                <rect key="frame" x="0.0" y="18.999999999999993" width="223" height="41.000000000000007"/>
+                                                                                <rect key="frame" x="0.0" y="18.999999999999993" width="223" height="41"/>
                                                                                 <subviews>
                                                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Certificate No." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Q2-yK-uJX">
                                                                                         <rect key="frame" x="10" y="2" width="203" height="37"/>
@@ -3638,7 +3652,7 @@ Uttar Pradesh</string>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </view>
                                                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CB4-rd-kuR">
-                                                                                <rect key="frame" x="233" y="18.999999999999993" width="80" height="41.000000000000007"/>
+                                                                                <rect key="frame" x="233" y="18.999999999999993" width="80" height="41"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="80" id="fh2-65-s5g"/>
                                                                                 </constraints>
@@ -5023,10 +5037,10 @@ Uttar Pradesh</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="underPageBackgroundColor">
             <color red="0.70980392156862748" green="0.71764705882352942" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
