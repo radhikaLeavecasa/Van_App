@@ -61,7 +61,7 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate & UINavigationCo
     }
     override func viewWillAppear(_ animated: Bool) {
         if Cookies.userInfo()?.type == 3 {
-            btnChangeRequest.isHidden = false
+            btnChangeRequest.setTitle("Change Request", for: .normal)
             btnVwLocation.setTitle("Start Day", for: .normal)
             let vc = ViewControllerHelper.getViewController(ofType: .VehicleRegisPopUpVC, StoryboardName: .Main) as! VehicleRegisPopUpVC
             self.vwHeader.isHidden = true
@@ -80,7 +80,7 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate & UINavigationCo
                 btnVwLocation.setTitle("Completed", for: .normal)
             }
         } else {
-            btnChangeRequest.isHidden = true
+            btnChangeRequest.setTitle("Live Tracking", for: .normal)
             btnVwLocation.setTitle("View Loaction", for: .normal)
             handleApi(vanNo: vanNo)
         }
@@ -127,12 +127,19 @@ class HomeVC: UIViewController, UIImagePickerControllerDelegate & UINavigationCo
         } else if Cookies.userInfo()?.type == 1 {
             let vc = ViewControllerHelper.getViewController(ofType: .MapVC, StoryboardName: .Main) as! MapVC
             vc.vanNo = vanNo
+            vc.isLive = false
             self.pushView(vc: vc)
             
         }
     }
     
     @IBAction func actionChangeRequest(_ sender: Any) {
+        if Cookies.userInfo()?.type == 1 {
+            let vc = ViewControllerHelper.getViewController(ofType: .MapVC, StoryboardName: .Main) as! MapVC
+            vc.vanNo = vanNo
+            vc.isLive = true
+            self.pushView(vc: vc)
+        }
     }
     
     @IBAction func actionVanMeter(_ sender: UIButton) {

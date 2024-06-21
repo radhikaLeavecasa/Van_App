@@ -32,10 +32,10 @@ extension UIViewController{
         dateFormatter.dateFormat = formate
         return dateFormatter.string(from: date)
     }
-    func convertStringToDate(_ date: String) -> Date {
+    func convertStringToDate(_ date: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ") -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        dateFormatter.dateFormat = format
         return dateFormatter.date(from: date) ?? Date()
     }
 }

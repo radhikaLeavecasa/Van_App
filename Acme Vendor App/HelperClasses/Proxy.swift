@@ -78,49 +78,45 @@ class Proxy: UIViewController, UIPopoverPresentationControllerDelegate, NVActivi
             viewController.dismiss(animated: true, completion: nil)
         }
     }
-//    func calculateWidthForCell(at indexPath: IndexPath, arr:[String]) -> CGFloat {
-//        let content = arr[indexPath.row] // Get the content for this cell
-//        let textWidth = content.size(withAttributes: [NSAttributedString.Key.font: UIFont.regularFont(size: 12)]).width // Calculate the width of the content
-//
-//        // You can also add some extra padding if needed
-//        let cellWidth = textWidth + 20
-//
-//        return cellWidth
-//    }
-//    func presentPopover2(_ parentViewController: UIViewController, _ viewController: UIViewController, collectionViewCell: UICollectionViewCell, collectionViewIndexPath: IndexPath, tableViewCell: UITableViewCell, tableViewIndexPath: IndexPath, size: CGSize, arrowDirection: UIPopoverArrowDirection = .any, frame: CGRect = .zero) {
-//        viewController.preferredContentSize = size
-//        viewController.modalPresentationStyle = .popover
-//        
-//        if let pres = viewController.popoverPresentationController {
-//            pres.delegate = self
-//        }
-//        UIApplication.topViewController()?.present(viewController, animated: true)
-//        //parentViewController.present(viewController, animated: true)
-//        
-//        if let pop = viewController.popoverPresentationController {
-//            if let collectionView = collectionViewCell.superview as? UICollectionView {
-//                let rectInCollectionView = collectionView.layoutAttributesForItem(at: collectionViewIndexPath)?.frame
-//                let rectInSuperview = collectionView.convert(rectInCollectionView ?? .zero, to: collectionView.superview)
-//                pop.sourceRect = rectInSuperview
-//                pop.sourceView = collectionView.superview
-//            }
-//            
-//            if let tableView = tableViewCell.superview as? UITableView {
-//                let rectInTableView = tableView.rectForRow(at: tableViewIndexPath)
-//                let rectInSuperview = tableView.convert(rectInTableView, to: tableView.superview)
-//                pop.sourceRect = rectInSuperview
-//                pop.sourceView = tableView.superview
-//            }
-//            
-//            pop.backgroundColor = .white
-//            pop.permittedArrowDirections = arrowDirection
-//            pop.sourceRect = frame
-//        }
-//        
-//        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-//            viewController.dismiss(animated: true, completion: nil)
-//        }
-//    }
+    
+    func calculateDuration(from startDate: Date, to endDate: Date) -> String {
+        let calendar = Calendar.current
+        
+        // Calculate components from the dates
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: startDate, to: endDate)
+        
+        // Extracting components from DateComponents
+        let years = components.year ?? 0
+        let months = components.month ?? 0
+        let days = components.day ?? 0
+        let hours = components.hour ?? 0
+        let minutes = components.minute ?? 0
+        let seconds = components.second ?? 0
+        
+        // Formatting the duration
+        var durationString = ""
+        if years > 0 {
+            durationString += "\(years) year" + (years > 1 ? "s" : "") + " "
+        }
+        if months > 0 {
+            durationString += "\(months) month" + (months > 1 ? "s" : "") + " "
+        }
+        if days > 0 {
+            durationString += "\(days) day" + (days > 1 ? "s" : "") + " "
+        }
+        if hours > 0 {
+            durationString += "\(hours) hour" + (hours > 1 ? "s" : "") + " "
+        }
+        if minutes > 0 {
+            durationString += "\(minutes) minute" + (minutes > 1 ? "s" : "") + " "
+        }
+        if seconds > 0 {
+            durationString += "\(seconds) second" + (seconds > 1 ? "s" : "")
+        }
+        
+        return durationString.trimmingCharacters(in: .whitespaces)
+    }
+
     
     
     

@@ -11,42 +11,40 @@ import CoreLocation
 
 class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     //MARK: - @IBOutlets
+    @IBOutlet weak var cnstCalendarHeight: NSLayoutConstraint!
+    @IBOutlet weak var cnstStackHeight: NSLayoutConstraint!
+    @IBOutlet weak var vwStack: UIStackView!
+    @IBOutlet var btnMapList: [UIButton]!
+    @IBOutlet weak var tblVwList: UITableView!
+    @IBOutlet weak var vwList: UIView!
     @IBOutlet weak var mapVw: MKMapView!
+    @IBOutlet weak var btnCalendar: UIButton!
+    @IBOutlet weak var vwMap: UIView!
     //MARK: - Variables
+    var isLive = false
     var locationManager: CLLocationManager = CLLocationManager()
     var viewModel = MapVM()
     var vanNo = String()
     var timer: Timer?
-    var status = CLLocationManager.authorizationStatus()
-    var currentLocation: CLLocation!
+    var isFirstTime = true
+    var selectedDate = Date()
+    var dateSelectedList:[LocationDetailModel]?
+    var sortedEntriesForList:[(Date, LocationDetailModel)]?
     //MARK: - Lifecycle method
     override func viewDidLoad() {
         super.viewDidLoad()
-        startTimer()
-      //  locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        if isLive {
+            cnstCalendarHeight.constant = 0
+            cnstStackHeight.constant = 0
+            vwStack.isHidden = true
+            btnCalendar.isHidden = true
+            startTimer()
+        }
         locationManager.delegate = self
         
-        if status == .notDetermined || status == .denied || status == .authorizedWhenInUse {
-            // present an alert indicating location authorization required
-            // and offer to take the user to Settings for the app via
-            // UIApplication -openUrl: and UIApplicationOpenSettingsURLString
-            
-//            locationManager.requestAlwaysAuthorization()
-//            locationManager.requestWhenInUseAuthorization()
-        }
-        
-        //        locationManager.startUpdatingLocation()
-//        locationManager.startUpdatingHeading()
-        
-        
-        //mapview setup to show van's location
         mapVw.delegate = self
-//        mapVw.showsUserLocation = true
         mapVw.mapType = MKMapType.standard
-//        mapVw.userTrackingMode = MKUserTrackingMode(rawValue: 2)!
-        
-        
-    }
+      }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,7 +58,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
                     let activityDate = self.convertStringToDate(createdAtString)
                     
                     let calendar = Calendar.current
-                    let currentDate = Date()
+                    let currentDate = self.selectedDate
                     
                     let activityComponents = calendar.dateComponents([.year, .month, .day], from: activityDate)
                     let currentComponents = calendar.dateComponents([.year, .month, .day], from: currentDate)
@@ -82,6 +80,19 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
                         }
                     }
                 }
+                self.dateSelectedList = filteredActivities
+                
+                var datesForList = [(Date, LocationDetailModel)]()
+                
+                for i in self.dateSelectedList ?? [] {
+                    if i.vehicleNumber == "UP87T4275" {
+                        datesForList.append((self.convertStringToDate(i.createdDateReadable ?? "", format: "dd MMM, yyyy, hh:mm a"), i))
+                    }
+                }
+                
+                self.sortedEntriesForList = datesForList.sorted(by: { $0.0 > $1.0 })
+                
+                self.tblVwList.reloadData()
             } else {
                 if msg == CommonError.INTERNET {
                     Proxy.shared.showSnackBar(message: CommonMessage.NO_INTERNET_CONNECTION)
@@ -111,12 +122,20 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         annotationView?.displayPriority = .required
         
         // Set numberLabel.text to annotation title
-        annotationView?.numberLabel.text = annotation.title ?? ""
-        annotationView?.numberLabel.textColor = .red
-        annotationView?.numberLabel.backgroundColor = .white
-        // Set image for annotation view
-        if (annotation.title) != nil {
-            annotationView?.image = UIImage(named: "ic_pin")
+        if annotation.title != "Current loc" {
+            annotationView?.numberLabel.text = annotation.title ?? ""
+            annotationView?.numberLabel.textColor = .red
+            annotationView?.numberLabel.backgroundColor = .white
+            // Set image for annotation view
+            if (annotation.title) != nil {
+                annotationView?.image = UIImage(named: "ic_pin")
+            }
+        } else {
+            if annotation.subtitle == "Stopped" {
+                annotationView?.image = UIImage(named: "ic_stop")
+            } else if annotation.subtitle == "Running" {
+                annotationView?.image = UIImage(named: "ic_running")
+            }
         }
         
         return annotationView
@@ -141,29 +160,41 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         viewModel.getCurrentTrackApi { val, msg in
             if val {
                 //Make Polyline
-                var area = [CLLocationCoordinate2D]()
+                //var area = [CLLocationCoordinate2D]()
+                var dates = [(Date, LocationDetailModel)]()
+                
                 for i in self.viewModel.vanLocation {
-                    if let latitudeString = i.latitude, let longitudeString = i.longitude {
-                        area.append(CLLocationCoordinate2D(latitude: latitudeString, longitude: longitudeString))
+                    if i.vehicleNumber == "UP87T4275" {
+                        dates.append((self.convertStringToDate(i.createdDateReadable ?? "",format: "dd MMM, yyyy, hh:mm a"), i))
                     }
                 }
                 
-               // self.mapVw.showsUserLocation = true
+                let sortedEntries = dates.sorted(by: { $0.0 > $1.0 })
                 
-                // Assuming 'area' contains coordinates for the region you want to display
-                let center = CLLocationCoordinate2D(latitude: Double(area.first?.latitude ?? 0.0), longitude: Double(area.first?.longitude ?? 0.0))
-                let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                
-                let newLocation = CLLocation(latitude: Double(area.first?.latitude ?? 0.0), longitude: Double(area.first?.longitude ?? 0.0))
-                self.locationManager.delegate?.locationManager?(self.locationManager, didUpdateLocations: [newLocation])
-                
-//                let annotation2 = MKPointAnnotation()
-//                annotation2.coordinate = CLLocationCoordinate2D(latitude: Double(area.first?.latitude ?? 0.0), longitude: Double(area.first?.longitude ?? 0.0))
-//                annotation2.title = "Current loc"
-//                self.mapVw.addAnnotation(annotation2)
-                // Set the region on the map view
-                self.mapVw.setRegion(region, animated: true)
-                
+                if let latestEntry = sortedEntries.first?.1 { //Checking latest entry in an array
+                    
+                    let center = CLLocationCoordinate2D(latitude: Double(latestEntry.latitude ?? 0.0), longitude: Double(latestEntry.longitude ?? 0.0))
+                    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                    
+                    let newLocation = CLLocation(latitude: Double(latestEntry.latitude ?? 0.0), longitude: Double(latestEntry.longitude ?? 0.0))
+                    self.locationManager.delegate?.locationManager?(self.locationManager, didUpdateLocations: [newLocation])
+                    
+                    let annotation2 = MKPointAnnotation()
+                    
+                    annotation2.coordinate = CLLocationCoordinate2D(latitude: Double(latestEntry.latitude ?? 0.0), longitude: Double(latestEntry.longitude ?? 0.0))
+                    
+                    let annotationsToRemove = self.mapVw.annotations.filter { $0.title == "Current loc" }
+                    self.mapVw.removeAnnotations(annotationsToRemove)
+                    
+                    annotation2.title = "Current loc"
+                    annotation2.subtitle = latestEntry.ignition == true ? "Running" : "Stopped"
+                    self.mapVw.addAnnotation(annotation2)
+                    // Set the region on the map view
+                    if self.isFirstTime {
+                        self.mapVw.setRegion(region, animated: true)
+                        self.isFirstTime = false
+                    }
+                }
             } else {
                 if msg == CommonError.INTERNET {
                     Proxy.shared.showSnackBar(message: CommonMessage.NO_INTERNET_CONNECTION)
@@ -186,6 +217,41 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBAction func actionBack(_ sender: Any) {
         popView()
+    }
+    @IBAction func actionCalendar(_ sender: Any) {
+        openDateCalendar()
+    }
+    
+    @IBAction func actionVanMeter(_ sender: UIButton) {
+        for btn in btnMapList {
+            if sender.tag == btn.tag {
+                btnMapList[btn.tag].setTitleColor(.white, for: .normal)
+                btnMapList[btn.tag].backgroundColor = .APP_BLUE_CLR
+            } else {
+                btnMapList[btn.tag].setTitleColor(.black, for: .normal)
+                btnMapList[btn.tag].backgroundColor = .APP_GRAY_CLR
+            }
+        }
+        vwMap.isHidden = sender.tag == 1
+        vwList.isHidden = sender.tag == 0
+        if sender.tag == 0 {
+            mapVw.reloadInputViews()
+        } else {
+            tblVwList.reloadData()
+        }
+    }
+    func openDateCalendar() {
+        if let calendar = UIStoryboard.init(name: ViewControllerType.WWCalendarTimeSelector.rawValue, bundle: nil).instantiateInitialViewController() as? WWCalendarTimeSelector {
+            view.endEditing(true)
+            calendar.delegate = self
+            calendar.optionCurrentDate = selectedDate
+            calendar.optionStyles.showDateMonth(true)
+            calendar.optionStyles.showMonth(false)
+            calendar.optionStyles.showYear(true)
+            calendar.optionStyles.showTime(false)
+            calendar.optionButtonShowCancel = true
+            self.present(calendar, animated: true, completion: nil)
+        }
     }
 }
 
@@ -220,5 +286,46 @@ class CustomAnnotationView: MKAnnotationView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension MapVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sortedEntriesForList?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListViewTVC", for: indexPath) as! ListViewTVC
+        cell.lblLocationTime.text = "\(sortedEntriesForList?[indexPath.row].1.location ?? "")\non\n\(sortedEntriesForList?[indexPath.row].1.createdDateReadable ?? "")"
+        cell.vwLine.backgroundColor = sortedEntriesForList?[indexPath.row].1.ignition2 == "1" ? .green : .red
+        
+        cell.vwLine.isHidden = indexPath.row == (sortedEntriesForList?.count ?? 0)-1
+        cell.lblDuration.isHidden = indexPath.row == (sortedEntriesForList?.count ?? 0)-1
+        
+        if indexPath.row != (sortedEntriesForList?.count ?? 0)-1 {
+            
+            cell.lblDuration.text = "\(sortedEntriesForList?[indexPath.row].1.ignition2 == "1" ? "Ran" : "Stopped") for \(Proxy.shared.calculateDuration(from: sortedEntriesForList?[indexPath.row+1].0 ?? Date(), to: sortedEntriesForList?[indexPath.row].0 ?? Date()))"
+        }
+        return cell
+   }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+}
+
+extension MapVC: WWCalendarTimeSelectorProtocol {
+    
+    func WWCalendarTimeSelectorDone(_ selector: WWCalendarTimeSelector, date: Date) {
+        selectedDate = date
+        viewWillAppear(true)
+        self.tblVwList.reloadData()
+    }
+    
+    func WWCalendarTimeSelectorShouldSelectDate(_ selector: WWCalendarTimeSelector, date: Date) -> Bool {
+        let calendar = Calendar.current
+        let oneMonthAgo = calendar.date(byAdding: .month, value: -1, to: Date()) ?? Date()
+        
+        // Compare selected date with one month ago date
+        return date >= oneMonthAgo && date < Date()
     }
 }

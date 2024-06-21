@@ -11,6 +11,7 @@ import ObjectMapper
 struct LocationDetailModel: Mappable {
     var id: String?
     var ignition: Bool?
+    var ignition2: String?
     var vehicleNumber: String?
     var deviceNumber: String?
     var vendorCode: String?
@@ -38,6 +39,7 @@ struct LocationDetailModel: Mappable {
     mutating func mapping(map: Map) {
         id <- map["id"]
         ignition <- map["ignition"]
+        ignition2 <- map["ignition"]
         vehicleNumber <- map["vehicleNumber"]
         deviceNumber <- map["deviceNumber"]
         vendorCode <- map["vendorCode"]
